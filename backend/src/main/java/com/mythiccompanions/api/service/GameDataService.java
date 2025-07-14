@@ -20,7 +20,7 @@ public class GameDataService {
 
     private GameData gameData;
 
-    //@PostConstruct
+    @PostConstruct
     public void loadGameData() throws IOException {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         InputStream inputStream = new ClassPathResource("game-data.yml").getInputStream();
