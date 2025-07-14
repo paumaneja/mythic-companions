@@ -1,0 +1,10 @@
+package com.mythiccompanions.api.repository;
+
+import com.mythiccompanions.api.entity.Companion;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CompanionRepository extends JpaRepository<Companion, Long> {
+
+}
