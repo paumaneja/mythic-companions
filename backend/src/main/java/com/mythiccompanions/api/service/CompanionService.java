@@ -18,9 +18,9 @@ public class CompanionService {
     private final UserRepository userRepository;
     private final GameDataService gameDataService;
 
-    public Companion adoptCompanion(Long userId, CompanionAdoptionDto adoptionDto) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
+    public Companion adoptCompanion(String username, CompanionAdoptionDto adoptionDto) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with username: " + username));
 
         if (companionRepository.countByUser(user) >= 6) {
             throw new IllegalStateException("Adoption failed: User already has the maximum number of companions (6).");
