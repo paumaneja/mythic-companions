@@ -3,6 +3,7 @@ package com.mythiccompanions.api.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.mythiccompanions.api.model.GameData;
+import com.mythiccompanions.api.model.GameRules;
 import com.mythiccompanions.api.model.Species;
 import com.mythiccompanions.api.model.Universe;
 import jakarta.annotation.PostConstruct;
@@ -38,6 +39,10 @@ public class GameDataService {
 
     public List<Universe> getUniverses() {
         return gameData.getUniverses();
+    }
+
+    public GameRules getGameRules() {
+        return gameData.getGameRules();
     }
 
 }

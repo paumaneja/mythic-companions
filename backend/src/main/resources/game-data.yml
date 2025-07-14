@@ -137,3 +137,11 @@ species:
           GLITTER_BEAM: "/assets/companions/unicorn/train_glitter_beam.mp4"
           DREAM_DUST: "/assets/companions/unicorn/train_dream_dust.mp4"
           RAINBOW_WAVE: "/assets/companions/unicorn/train_rainbow_wave.mp4"
+
+game_rules:
+  decay_rates_per_hour:
+    energy: 2
+    hunger: 5
+    happiness: 3
+    hygiene: 4
+  sickness_health_decay_per_hour: 10

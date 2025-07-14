@@ -11,5 +11,8 @@ public class GameData {
     private Map<String, UiTheme> uiThemes;
     private List<Universe> universes;
     private List<Species> species;
+
+    @JsonProperty("game_rules")
+    private GameRules gameRules;
     // We will add items, progression, etc. here later
 }

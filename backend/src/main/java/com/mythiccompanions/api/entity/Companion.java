@@ -41,6 +41,8 @@ public class Companion {
     private LocalDateTime nextSleepTimestamp;
     private LocalDateTime nextTrainTimestamp;
 
+    private LocalDateTime lastStatsUpdateTimestamp;
+
     private String equippedWeaponId;
 
     @ManyToOne(fetch = FetchType.LAZY)

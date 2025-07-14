@@ -22,6 +22,7 @@ public class CompanionService {
     private final CompanionRepository companionRepository;
     private final UserRepository userRepository;
     private final GameDataService gameDataService;
+    private final GameLoopService gameLoopService;
 
     public Companion adoptCompanion(String username, CompanionAdoptionDto adoptionDto) {
         User user = userRepository.findByUsername(username)
@@ -65,8 +66,8 @@ public class CompanionService {
             throw new AccessDeniedException("User does not have permission to access this companion.");
         }
 
-        // TODO: Here we will later call the GameLoopService to apply stat decay before returning.
+        gameLoopService.applyPassiveDecay(companion);
 
-        return companion;
+        return companionRepository.save(companion);
     }
 }
