@@ -1,6 +1,7 @@
 package com.mythiccompanions.api.controller;
 
 import com.mythiccompanions.api.dto.CompanionAdoptionDto;
+import com.mythiccompanions.api.dto.CompanionResponseDto;
 import com.mythiccompanions.api.entity.Companion;
 import com.mythiccompanions.api.service.CompanionService;
 import jakarta.validation.Valid;
@@ -19,13 +20,27 @@ public class CompanionController {
     private final CompanionService companionService;
 
     @PostMapping
-    public ResponseEntity<Companion> adoptCompanion(
+    public ResponseEntity<CompanionResponseDto> adoptCompanion(
             @AuthenticationPrincipal UserDetails userDetails,
             @Valid @RequestBody CompanionAdoptionDto adoptionDto) {
 
         String username = userDetails.getUsername();
-        Companion newCompanion = companionService.adoptCompanion(username, adoptionDto);
+        Companion savedCompanion = companionService.adoptCompanion(username, adoptionDto);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(newCompanion);
+        CompanionResponseDto responseDto = new CompanionResponseDto(
+                savedCompanion.getId(),
+                savedCompanion.getName(),
+                savedCompanion.getSpeciesId(),
+                savedCompanion.getStatus(),
+                savedCompanion.getHealth(),
+                savedCompanion.getEnergy(),
+                savedCompanion.getHunger(),
+                savedCompanion.getHappiness(),
+                savedCompanion.getHygiene(),
+                savedCompanion.getExperiencePoints(),
+                savedCompanion.getEquippedWeaponId()
+        );
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 }
