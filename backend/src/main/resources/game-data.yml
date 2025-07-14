@@ -1,0 +1,139 @@
+ui_themes:
+  GALACTIC_REBELLION:
+    action_icons:
+      feed: "/assets/ui/galactic_rebellion/icon_feed.png"
+      play: "/assets/ui/galactic_rebellion/icon_play.png"
+      clean: "/assets/ui/galactic_rebellion/icon_clean.png"
+      sleep: "/assets/ui/galactic_rebellion/icon_sleep.png"
+      train: "/assets/ui/galactic_rebellion/icon_train.png"
+  SQUIZZY_WORLD:
+    action_icons:
+      feed: "/assets/ui/squizzy_world/icon_feed.png"
+      play: "/assets/ui/squizzy_world/icon_play.png"
+      clean: "/assets/ui/squizzy_world/icon_clean.png"
+      sleep: "/assets/ui/squizzy_world/icon_sleep.png"
+      train: "/assets/ui/squizzy_world/icon_train.png"
+
+universes:
+  - id: "GALACTIC_REBELLION"
+    name: "Galactic Rebellion"
+    speciesIds: ["JEDI", "EWOK", "SERVICE_DROID"]
+  - id: "SQUIZZY_WORLD"
+    name: "Squizzy World"
+    speciesIds: ["CAT", "BUNNY", "UNICORN"]
+
+species:
+  - speciesId: "JEDI"
+    name: "Jedi"
+    description: "Un guardià de la pau i la justícia a la galàxia."
+    allowedWeaponTypes: ["LIGHTSABER", "FORCE_GLOVE", "BLASTER"]
+    assets:
+      static_unequipped: "/assets/companions/jedi/static_default.png"
+      static_equipped:
+        LIGHTSABER: "/assets/companions/jedi/equipped_lightsaber.png"
+        FORCE_GLOVE: "/assets/companions/jedi/equipped_glove.png"
+        BLASTER: "/assets/companions/jedi/equipped_blaster.png"
+      actions:
+        feed: "/assets/companions/jedi/action_feed.mp4"
+        play: "/assets/companions/jedi/action_play.mp4"
+        sleep: "/assets/companions/jedi/action_sleep.mp4"
+        clean: "/assets/companions/jedi/action_clean.mp4"
+        train:
+          LIGHTSABER: "/assets/companions/jedi/train_lightsaber.mp4"
+          FORCE_GLOVE: "/assets/companions/jedi/train_glove.mp4"
+          BLASTER: "/assets/companions/jedi/train_blaster.mp4"
+  - speciesId: "EWOK"
+    name: "Ewok"
+    description: "Un habitant pelut i curiós dels boscos d'Endor."
+    allowedWeaponTypes: ["SPEAR", "SLINGSHOT", "NET"]
+    assets:
+      static_unequipped: "/assets/companions/ewok/static_default.png"
+      static_equipped:
+        SPEAR: "/assets/companions/ewok/equipped_spear.png"
+        SLINGSHOT: "/assets/companions/ewok/equipped_slingshot.png"
+        NET: "/assets/companions/ewok/equipped_net.png"
+      actions:
+        feed: "/assets/companions/ewok/action_feed.mp4"
+        play: "/assets/companions/ewok/action_play.mp4"
+        sleep: "/assets/companions/ewok/action_sleep.mp4"
+        clean: "/assets/companions/ewok/action_clean.mp4"
+        train:
+          SPEAR: "/assets/companions/ewok/train_spear.mp4"
+          SLINGSHOT: "/assets/companions/ewok/train_slingshot.mp4"
+          NET: "/assets/companions/ewok/train_net.mp4"
+  - speciesId: "SERVICE_DROID"
+    name: "Service Droid"
+    description: "Un autòmat servicial, ple de sorpreses i eines útils."
+    allowedWeaponTypes: [ "SHOCK_ARM", "TOOL_HAND", "DATA_SPIKE" ]
+    assets:
+      static_unequipped: "/assets/companions/service_droid/static_default.png"
+      static_equipped:
+        SHOCK_ARM: "/assets/companions/service_droid/equipped_shock_arm.png"
+        TOOL_HAND: "/assets/companions/service_droid/equipped_tool_hand.png"
+        DATA_SPIKE: "/assets/companions/service_droid/equipped_data_spike.png"
+      actions:
+        feed: "/assets/companions/service_droid/action_feed.mp4"
+        play: "/assets/companions/service_droid/action_play.mp4"
+        sleep: "/assets/companions/service_droid/action_sleep.mp4"
+        clean: "/assets/companions/service_droid/action_clean.mp4"
+        train:
+          SHOCK_ARM: "/assets/companions/service_droid/train_shock_arm.mp4"
+          TOOL_HAND: "/assets/companions/service_droid/train_tool_hand.mp4"
+          DATA_SPIKE: "/assets/companions/service_droid/train_data_spike.mp4"
+  - speciesId: "CAT"
+    name: "Cat"
+    description: "Elegant, independent i expert en l'art de la migdiada."
+    allowedWeaponTypes: ["PLUSH_PAW", "PURR_MELODY", "SLEEPY_YAWN"]
+    assets:
+      static_unequipped: "/assets/companions/cat/static_default.png"
+      static_equipped:
+        PLUSH_PAW: "/assets/companions/cat/equipped_plush_paw.png"
+        PURR_MELODY: "/assets/companions/cat/equipped_purr_melody.png"
+        SLEEPY_YAWN: "/assets/companions/cat/equipped_sleepy_yawn.png"
+      actions:
+        feed: "/assets/companions/cat/action_feed.mp4"
+        play: "/assets/companions/cat/action_play.mp4"
+        sleep: "/assets/companions/cat/action_sleep.mp4"
+        clean: "/assets/companions/cat/action_clean.mp4"
+        train:
+          PLUSH_PAW: "/assets/companions/cat/train_plush_paw.mp4"
+          PURR_MELODY: "/assets/companions/cat/train_purr_melody.mp4"
+          SLEEPY_YAWN: "/assets/companions/cat/train_sleepy_yawn.mp4"
+  - speciesId: "BUNNY"
+    name: "Bunny"
+    description: "Una bola de pèl energètica que es mou a salts d'alegria."
+    allowedWeaponTypes: ["BOUNCY_IMPACT", "PUFF_OF_FLUFF", "BOUNCING_WAVE"]
+    assets:
+      static_unequipped: "/assets/companions/bunny/static_default.png"
+      static_equipped:
+        BOUNCY_IMPACT: "/assets/companions/bunny/equipped_bouncy_impact.png"
+        PUFF_OF_FLUFF: "/assets/companions/bunny/equipped_puff_of_fluff.png"
+        BOUNCING_WAVE: "/assets/companions/bunny/equipped_bouncing_wave.png"
+      actions:
+        feed: "/assets/companions/bunny/action_feed.mp4"
+        play: "/assets/companions/bunny/action_play.mp4"
+        sleep: "/assets/companions/bunny/action_sleep.mp4"
+        clean: "/assets/companions/bunny/action_clean.mp4"
+        train:
+          BOUNCY_IMPACT: "/assets/companions/bunny/train_bouncy_impact.mp4"
+          PUFF_OF_FLUFF: "/assets/companions/bunny/train_puff_of_fluff.mp4"
+          BOUNCING_WAVE: "/assets/companions/bunny/train_bouncing_wave.mp4"
+  - speciesId: "UNICORN"
+    name: "Unicorn"
+    description: "Una criatura mítica la banya de la qual brilla amb màgia."
+    allowedWeaponTypes: [ "GLITTER_BEAM", "DREAM_DUST", "RAINBOW_WAVE" ]
+    assets:
+      static_unequipped: "/assets/companions/unicorn/static_default.png"
+      static_equipped:
+        GLITTER_BEAM: "/assets/companions/unicorn/equipped_glitter_beam.png"
+        DREAM_DUST: "/assets/companions/unicorn/equipped_dream_dust.png"
+        RAINBOW_WAVE: "/assets/companions/unicorn/equipped_rainbow_wave.png"
+      actions:
+        feed: "/assets/companions/unicorn/action_feed.mp4"
+        play: "/assets/companions/unicorn/action_play.mp4"
+        sleep: "/assets/companions/unicorn/action_sleep.mp4"
+        clean: "/assets/companions/unicorn/action_clean.mp4"
+        train:
+          GLITTER_BEAM: "/assets/companions/unicorn/train_glitter_beam.mp4"
+          DREAM_DUST: "/assets/companions/unicorn/train_dream_dust.mp4"
+          RAINBOW_WAVE: "/assets/companions/unicorn/train_rainbow_wave.mp4"
