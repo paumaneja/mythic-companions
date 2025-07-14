@@ -1,4 +1,7 @@
 package com.mythiccompanions.api.dto;
 
-public class SpeciesDto {
-}
+public record SpeciesDto(
+        String id,
+        String name,
+        String description
+) {}

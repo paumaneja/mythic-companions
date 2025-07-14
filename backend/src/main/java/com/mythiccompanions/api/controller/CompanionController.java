@@ -1,11 +1,10 @@
 package com.mythiccompanions.api.controller;
 
-import com.mythiccompanions.api.dto.CompanionAdoptionDto;
-import com.mythiccompanions.api.dto.CompanionCardDto;
-import com.mythiccompanions.api.dto.CompanionResponseDto;
+import com.mythiccompanions.api.dto.*;
 import com.mythiccompanions.api.entity.Companion;
 import com.mythiccompanions.api.service.CompanionService;
 import com.mythiccompanions.api.service.GameDataService;
+import com.mythiccompanions.api.service.ProgressionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,6 +23,7 @@ public class CompanionController {
 
     private final CompanionService companionService;
     private final GameDataService gameDataService;
+    private final ProgressionService progressionService;
 
     @PostMapping
     public ResponseEntity<CompanionResponseDto> adoptCompanion(
@@ -61,6 +61,17 @@ public class CompanionController {
         return ResponseEntity.ok(companionCards);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<SanctuaryDto> getCompanionDetails(
+            @PathVariable Long id,
+            @AuthenticationPrincipal UserDetails userDetails) {
+
+        Companion companion = companionService.getCompanionByIdAndUsername(id, userDetails.getUsername());
+        SanctuaryDto sanctuaryDto = convertToSanctuaryDto(companion);
+
+        return ResponseEntity.ok(sanctuaryDto);
+    }
+
     private CompanionCardDto convertToCompanionCardDto(Companion companion) {
         String imageUrl = gameDataService.getSpeciesById(companion.getSpeciesId())
                 .map(species -> {
@@ -78,6 +89,39 @@ public class CompanionController {
                 companion.getStatus(),
                 imageUrl,
                 companion.getEquippedWeaponId()
+        );
+    }
+
+    private SanctuaryDto convertToSanctuaryDto(Companion companion) {
+        final String speciesId = companion.getSpeciesId();
+        StatsDto stats = new StatsDto(companion.getHealth(), companion.getEnergy(), companion.getHunger(), companion.getHappiness(), companion.getHygiene());
+        CooldownsDto cooldowns = new CooldownsDto(companion.getNextFeedTimestamp(), companion.getNextPlayTimestamp(), companion.getNextCleanTimestamp(), companion.getNextSleepTimestamp(), companion.getNextTrainTimestamp());
+
+        // TODO: Replace with real data from ProgressionService when implemented
+        ProgressionDto progression = new ProgressionDto(companion.getExperiencePoints(), 1, companion.getExperiencePoints(), 100);
+
+        SpeciesDto speciesDto = gameDataService.getSpeciesById(speciesId)
+                .map(s -> new SpeciesDto(s.getSpeciesId(), s.getName(), s.getDescription()))
+                .orElse(null);
+
+        String universeId = gameDataService.getUniverses().stream()
+                .filter(universe -> universe.getSpeciesIds().contains(speciesId))
+                .findFirst()
+                .map(universe -> universe.getId())
+                .orElse("UNKNOWN_UNIVERSE");
+
+        EquippedWeaponDto weaponDto = null;
+
+        return new SanctuaryDto(
+                companion.getId(),
+                companion.getName(),
+                universeId,
+                speciesDto,
+                companion.getStatus(),
+                stats,
+                progression,
+                weaponDto,
+                cooldowns
         );
     }
 }

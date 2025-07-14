@@ -3,11 +3,13 @@ package com.mythiccompanions.api.service;
 import com.mythiccompanions.api.dto.CompanionAdoptionDto;
 import com.mythiccompanions.api.entity.Companion;
 import com.mythiccompanions.api.entity.User;
+import com.mythiccompanions.api.exception.ResourceNotFoundException;
 import com.mythiccompanions.api.model.Status;
 import com.mythiccompanions.api.repository.CompanionRepository;
 import com.mythiccompanions.api.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -53,5 +55,18 @@ public class CompanionService {
         return userRepository.findByUsername(username)
                 .map(companionRepository::findByUser)
                 .orElse(Collections.emptyList());
+    }
+
+    public Companion getCompanionByIdAndUsername(Long companionId, String username) {
+        Companion companion = companionRepository.findById(companionId)
+                .orElseThrow(() -> new ResourceNotFoundException("Companion not found with id: " + companionId));
+
+        if (!companion.getUser().getUsername().equals(username)) {
+            throw new AccessDeniedException("User does not have permission to access this companion.");
+        }
+
+        // TODO: Here we will later call the GameLoopService to apply stat decay before returning.
+
+        return companion;
     }
 }
