@@ -43,7 +43,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> loginUser(@Valid @RequestBody LoginRequestDto loginRequest) {
-        // 1. Authenticate the user with username and password
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.username(),
@@ -51,13 +50,10 @@ public class AuthController {
                 )
         );
 
-        // 2. Set the authentication in the security context
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // 3. Generate the JWT token
         String token = tokenProvider.generateToken(authentication);
 
-        // 4. Return the token in the response
         return ResponseEntity.ok(new LoginResponseDto(token));
     }
 }

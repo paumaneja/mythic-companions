@@ -10,6 +10,9 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CompanionService {
@@ -35,7 +38,7 @@ public class CompanionService {
         newCompanion.setUser(user);
         newCompanion.setName(adoptionDto.name());
         newCompanion.setSpeciesId(adoptionDto.speciesId());
-        newCompanion.setStatus(Status.ACTIVE); // New companions start as ACTIVE
+        newCompanion.setStatus(Status.ACTIVE);
 
         newCompanion.setHealth(100);
         newCompanion.setEnergy(100);
@@ -44,5 +47,11 @@ public class CompanionService {
         newCompanion.setHygiene(100);
 
         return companionRepository.save(newCompanion);
+    }
+
+    public List<Companion> findCompanionsByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .map(companionRepository::findByUser)
+                .orElse(Collections.emptyList());
     }
 }

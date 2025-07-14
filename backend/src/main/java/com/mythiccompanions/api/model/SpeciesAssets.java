@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.Map;
 
 @Data
-class SpeciesAssets {
+public class SpeciesAssets {
     @JsonProperty("static_unequipped")
     private String staticUnequipped;
 

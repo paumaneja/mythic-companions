@@ -2,8 +2,6 @@ package com.mythiccompanions.api.model;
 
 import lombok.Data;
 
-import java.util.Map;
-
 @Data
 public class ActionIcons {
     private String feed;
