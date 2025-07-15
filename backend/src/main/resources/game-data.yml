@@ -138,6 +138,290 @@ species:
           DREAM_DUST: "/assets/companions/unicorn/train_dream_dust.mp4"
           RAINBOW_WAVE: "/assets/companions/unicorn/train_rainbow_wave.mp4"
 
+items:
+  # --- CONSUMABLES ---
+  - itemId: "PHOENIX_DOWN"
+    name: "Phoenix Down"
+    description: "A miraculous feather that brings a companion back from the brink."
+    type: "CONSUMABLE"
+    imageUrl: "/assets/items/phoenix_down.png"
+    rarity: "EPIC"
+    forSale: true
+    price: 500
+    effect: { revive: true, health: 50 }
+  - itemId: "NANO_REPAIR_GEL"
+      name: "NanoRepair Gel"
+      description: "Regenerates +25 health."
+      type: "CONSUMABLE"
+      imageUrl: "/assets/items/nano_repair_gel.png"
+      rarity: "COMMON"
+      forSale: true
+      price: 50
+      effect: { health: 25 }
+      - itemId: "STANDARD_RATION_PACK"
+        name: "Standard Ration Pack"
+        description: "A basic but filling meal. Restores +20 Hunger."
+        type: "CONSUMABLE"
+        imageUrl: "/assets/items/standard_ration_pack.png"
+        rarity: "COMMON"
+        forSale: true
+        price: 20
+        effect: { hunger: 20 }
+      - itemId: "SIMPLE_TOY"
+        name: "Simple Toy"
+        description: "A fun little distraction. Restores +15 Happiness."
+        type: "CONSUMABLE"
+        imageUrl: "/assets/items/simple_toy.png"
+        rarity: "COMMON"
+        forSale: true
+        price: 15
+        effect: { happiness: 15 }
+      - itemId: "MEDPAC"
+        name: "Medpac"
+        description: "A standard medical pack. Restores +40 Health."
+        type: "CONSUMABLE"
+        imageUrl: "/assets/items/medpac.png"
+        rarity: "UNCOMMON"
+        forSale: true
+        price: 80
+        effect: { health: 40 }
+      - itemId: "JOGAN_FRUIT"
+        name: "Jogan Fruit"
+        description: "A sweet and satisfying fruit. +25 Hunger, +10 Happiness."
+        type: "CONSUMABLE"
+        imageUrl: "/assets/items/jogan_fruit.png"
+        rarity: "UNCOMMON"
+        forSale: true
+        price: 55
+        effect: { hunger: 25, happiness: 10 }
+      - itemId: "GUMMY_CRITTER"
+        name: "Gummy Critter"
+        description: "A tasty, chewy candy. +20 Energy, +15 Happiness."
+        type: "CONSUMABLE"
+        imageUrl: "/assets/items/gummy_critter.png"
+        rarity: "UNCOMMON"
+        forSale: true
+        price: 45
+        effect: { energy: 20, happiness: 15 }
+      - itemId: "BACTA_PATCH"
+        name: "Bacta Patch"
+        description: "Advanced healing technology. +75 Health."
+        type: "CONSUMABLE"
+        imageUrl: "/assets/items/bacta_patch.png"
+        rarity: "RARE"
+        forSale: true
+        price: 150
+        effect: { health: 75 }
+      - itemId: "BLUE_MILK_CARTON"
+        name: "Blue Milk Carton"
+        description: "A galactic delicacy. +40 Hunger, +25 Happiness."
+        type: "CONSUMABLE"
+        imageUrl: "/assets/items/blue_milk_carton.png"
+        rarity: "RARE"
+        forSale: true
+        price: 90
+        effect: { hunger: 40, happiness: 25 }
+      - itemId: "RAINBOW_LOLLIPOP"
+        name: "Rainbow Lollipop"
+        description: "A swirl of pure joy and sugary energy. +30 Energy, +40 Happiness."
+        type: "CONSUMABLE"
+        imageUrl: "/assets/items/rainbow_lollipop.png"
+        rarity: "RARE"
+        forSale: true
+        price: 85
+        effect: { energy: 30, happiness: 40 }
+      - itemId: "MIRACLE_ELIXIR"
+        name: "Miracle Elixir"
+        description: "Cures any sickness and provides a small health boost."
+        type: "CONSUMABLE"
+        imageUrl: "/assets/items/miracle_elixir.png"
+        rarity: "RARE"
+        forSale: true
+        price: 200
+        effect: { curesSickness: true, health: 20 }
+      - itemId: "EXOTIC_FRUIT_PLATTER"
+        name: "Exotic Fruit Platter"
+        description: "A feast for the senses! Fully satisfying."
+        type: "CONSUMABLE"
+        imageUrl: "/assets/items/exotic_fruit_platter.png"
+        rarity: "EPIC"
+        forSale: true
+        price: 250
+        effect: { hunger: 60, happiness: 60 }
+      - itemId: "ANTIDOTE"
+        name: "Antidote"
+        description: "A simple remedy that cures sickness."
+        type: "CONSUMABLE"
+        imageUrl: "/assets/items/antidote.png"
+        rarity: "COMMON"
+        forSale: true
+        price: 100
+        effect: { curesSickness: true, health: 5 }
+
+      # --- WEAPONS ---
+      - itemId: "LIGHTSABER"
+        name: "Lightsaber"
+        description: "An elegant weapon for a more civilized age."
+        type: "WEAPON"
+        imageUrl: "/assets/items/lightsaber.png"
+        rarity: "EPIC"
+        forSale: true
+        price: 1000
+        weaponType: "LIGHTSABER"
+      - itemId: "FORCE_GLOVE"
+        name: "Force Glove"
+        description: "A gauntlet to channel the user's inner energy."
+        type: "WEAPON"
+        imageUrl: "/assets/items/force_glove.png"
+        rarity: "RARE"
+        forSale: true
+        price: 750
+        weaponType: "FORCE_GLOVE"
+      - itemId: "BLASTER"
+        name: "Blaster"
+        description: "Clumsy and random, but effective."
+        type: "WEAPON"
+        imageUrl: "/assets/items/blaster.png"
+        rarity: "COMMON"
+        forSale: true
+        price: 300
+        weaponType: "BLASTER"
+      - itemId: "SLINGSHOT"
+        name: "Slingshot"
+        description: "A sturdy wooden slingshot, surprisingly effective."
+        type: "WEAPON"
+        imageUrl: "/assets/items/slingshot.png"
+        rarity: "COMMON"
+        forSale: true
+        price: 250
+        weaponType: "SLINGSHOT"
+      - itemId: "SPEAR"
+        name: "Spear"
+        description: "A sharpened spear, simple and deadly."
+        type: "WEAPON"
+        imageUrl: "/assets/items/spear.png"
+        rarity: "UNCOMMON"
+        forSale: true
+        price: 400
+        weaponType: "SPEAR"
+      - itemId: "NET"
+        name: "Net"
+        description: "A weighted net for ensnaring foes."
+        type: "WEAPON"
+        imageUrl: "/assets/items/net.png"
+        rarity: "RARE"
+        forSale: true
+        price: 600
+        weaponType: "NET"
+      - itemId: "SHOCK_ARM"
+        name: "Shock Arm"
+        description: "An arm attachment that delivers a jolt of electricity."
+        type: "WEAPON"
+        imageUrl: "/assets/items/shock_arm.png"
+        rarity: "COMMON"
+        forSale: true
+        price: 350
+        weaponType: "SHOCK_ARM"
+      - itemId: "TOOL_HAND"
+        name: "Tool Hand"
+        description: "A multi-purpose manipulator with various tools."
+        type: "WEAPON"
+        imageUrl: "/assets/items/tool_hand.png"
+        rarity: "RARE"
+        forSale: true
+        price: 700
+        weaponType: "TOOL_HAND"
+      - itemId: "DATA_SPIKE"
+        name: "Data Spike"
+        description: "A sharp tool for interfacing with computer systems... forcefully."
+        type: "WEAPON"
+        imageUrl: "/assets/items/data_spike.png"
+        rarity: "EPIC"
+        forSale: true
+        price: 950
+        weaponType: "DATA_SPIKE"
+      - itemId: "PLUSH_PAW"
+        name: "Plush Paw"
+        description: "A disarmingly soft and fluffy paw for combat."
+        type: "WEAPON"
+        imageUrl: "/assets/items/plush_paw.png"
+        rarity: "COMMON"
+        forSale: true
+        price: 200
+        weaponType: "PLUSH_PAW"
+      - itemId: "PURR_MELODY"
+        name: "Purr Melody"
+        description: "A melody so soothing it can calm the fiercest of hearts."
+        type: "WEAPON"
+        imageUrl: "/assets/items/purr_melody.png"
+        rarity: "RARE"
+        forSale: true
+        price: 650
+        weaponType: "PURR_MELODY"
+      - itemId: "SLEEPY_YAWN"
+        name: "Sleepy Yawn"
+        description: "A contagious yawn that can put opponents to sleep."
+        type: "WEAPON"
+        imageUrl: "/assets/items/sleepy_yawn.png"
+        rarity: "RARE"
+        forSale: true
+        price: 700
+        weaponType: "SLEEPY_YAWN"
+      - itemId: "BOUNCY_IMPACT"
+        name: "Bouncy Impact"
+        description: "An attack that's as unpredictable as it is bouncy."
+        type: "WEAPON"
+        imageUrl: "/assets/items/bouncy_impact.png"
+        rarity: "COMMON"
+        forSale: true
+        price: 220
+        weaponType: "BOUNCY_IMPACT"
+      - itemId: "PUFF_OF_FLUFF"
+        name: "Puff of Fluff"
+        description: "A surprising explosion of soft fluff."
+        type: "WEAPON"
+        imageUrl: "/assets/items/puff_of_fluff.png"
+        rarity: "EPIC"
+        forSale: true
+        price: 900
+        weaponType: "PUFF_OF_FLUFF"
+      - itemId: "BOUNCING_WAVE"
+        name: "Bouncing Wave"
+        description: "A wave of energy that ricochets around."
+        type: "WEAPON"
+        imageUrl: "/assets/items/bouncing_wave.png"
+        rarity: "RARE"
+        forSale: true
+        price: 680
+        weaponType: "BOUNCING_WAVE"
+      - itemId: "GLITTER_BEAM"
+        name: "Glitter Beam"
+        description: "A dazzling beam of pure, concentrated glitter."
+        type: "WEAPON"
+        imageUrl: "/assets/items/glitter_beam.png"
+        rarity: "COMMON"
+        forSale: true
+        price: 280
+        weaponType: "GLITTER_BEAM"
+      - itemId: "DREAM_DUST"
+        name: "Dream Dust"
+        description: "A fine powder that brings forth pleasant dreams."
+        type: "WEAPON"
+        imageUrl: "/assets/items/dream_dust.png"
+        rarity: "RARE"
+        forSale: true
+        price: 720
+        weaponType: "DREAM_DUST"
+      - itemId: "RAINBOW_WAVE"
+        name: "Rainbow Wave"
+        description: "A vibrant wave of multi-colored energy."
+        type: "WEAPON"
+        imageUrl: "/assets/items/rainbow_wave.png"
+        rarity: "EPIC"
+        forSale: true
+        price: 1100
+        weaponType: "RAINBOW_WAVE"
+
 game_rules:
   decay_rates_per_hour:
     energy: 2

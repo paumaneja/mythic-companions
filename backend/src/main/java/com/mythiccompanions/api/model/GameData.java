@@ -16,5 +16,6 @@ public class GameData {
     private GameRules gameRules;
 
     private ProgressionRules progression;
-    // We will add items, progression, etc. here later
+
+    private List<Item> items;
 }

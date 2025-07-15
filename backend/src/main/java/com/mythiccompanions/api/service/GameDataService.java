@@ -50,4 +50,10 @@ public class GameDataService {
         return gameData.getProgression();
     }
 
+    public Optional<Item> getItemById(String itemId) {
+        return gameData.getItems().stream()
+                .filter(item -> item.getItemId().equals(itemId))
+                .findFirst();
+    }
+
 }
