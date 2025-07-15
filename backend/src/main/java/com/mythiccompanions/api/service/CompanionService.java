@@ -72,7 +72,7 @@ public class CompanionService {
             throw new AccessDeniedException("User does not have permission to access this companion.");
         }
 
-        gameLoopService.applyPassiveDecay(companion);
+        gameLoopService.applyPassiveEffects(companion);
 
         return companionRepository.save(companion);
     }

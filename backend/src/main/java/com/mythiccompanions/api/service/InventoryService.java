@@ -95,7 +95,7 @@ public class InventoryService {
 
         Companion companion = companionRepository.findById(companionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Companion not found: " + companionId));
-        gameLoopService.applyPassiveDecay(companion);
+        gameLoopService.applyPassiveEffects(companion);
 
         if (!companion.getUser().equals(user)) {
             throw new SecurityException("User does not own this companion.");
