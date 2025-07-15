@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UserAlreadyExistsException.class)
     public ResponseEntity<?> handleUserAlreadyExistsException(UserAlreadyExistsException ex, WebRequest request) {
         Map<String, String> body = Map.of("error", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.CONFLICT); // Returns a 409 Conflict
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(ActionUnavailableException.class)
@@ -33,6 +33,18 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
         Map<String, String> body = Map.of("error", ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ItemNotFoundException.class)
+    public ResponseEntity<?> handleItemNotFoundException(ItemNotFoundException ex, WebRequest request) {
+        Map<String, String> body = Map.of("error", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(IncompatibleWeaponException.class)
+    public ResponseEntity<?> handleIncompatibleWeaponException(IncompatibleWeaponException ex, WebRequest request) {
+        Map<String, String> body = Map.of("error", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
     // A general handler for all other exceptions
