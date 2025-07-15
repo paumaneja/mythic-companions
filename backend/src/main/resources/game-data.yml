@@ -170,3 +170,21 @@ game_rules:
       cooldown_hours: 8
       effects:
         energy: 100
+    TRAIN:
+      cooldown_hours: 1
+
+progression:
+  train_xp_gain: 10
+  energy_cost_train: 25
+  hygiene_cost_train: 5
+  xp_levels:
+    - { level: 1, xp_required: 0 }
+    - { level: 2, xp_required: 222 }
+    - { level: 3, xp_required: 667 }
+    - { level: 4, xp_required: 1333 }
+    - { level: 5, xp_required: 2222 }
+    - { level: 6, xp_required: 3333 }
+    - { level: 7, xp_required: 4667 }
+    - { level: 8, xp_required: 6222 }
+    - { level: 9, xp_required: 8000 }
+    - { level: 10, xp_required: 10000 }

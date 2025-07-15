@@ -46,4 +46,8 @@ public class GameDataService {
         return gameData.getGameRules().getActions().get(actionName);
     }
 
+    public ProgressionRules getProgressionRules() {
+        return gameData.getProgression();
+    }
+
 }

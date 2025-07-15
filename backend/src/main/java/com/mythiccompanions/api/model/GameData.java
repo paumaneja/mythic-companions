@@ -14,5 +14,7 @@ public class GameData {
 
     @JsonProperty("game_rules")
     private GameRules gameRules;
+
+    private ProgressionRules progression;
     // We will add items, progression, etc. here later
 }
