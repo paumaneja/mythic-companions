@@ -153,3 +153,20 @@ game_rules:
         happiness: 5
         hygiene: -2
         energy: -2
+    PLAY:
+      cooldown_hours: 2
+      effects:
+        happiness: 14
+        hygiene: -3
+        hunger: -6
+        energy: -7
+    CLEAN:
+      cooldown_hours: 6
+      effects:
+        hygiene: 40
+        happiness: 3
+        energy: -2
+    SLEEP:
+      cooldown_hours: 8
+      effects:
+        energy: 100

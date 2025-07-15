@@ -103,4 +103,76 @@ public class CompanionService {
 
         return companionRepository.save(companion);
     }
+
+    @Transactional
+    public Companion playWithCompanion(Long companionId, String username) {
+        Companion companion = getCompanionByIdAndUsername(companionId, username);
+
+        if (companion.getStatus() != Status.ACTIVE) {
+            throw new ActionUnavailableException("Action 'Play' is unavailable. Companion status is " + companion.getStatus());
+        }
+        if (companion.getNextPlayTimestamp() != null && LocalDateTime.now().isBefore(companion.getNextPlayTimestamp())) {
+            throw new ActionUnavailableException("Action 'Play' is on cooldown.");
+        }
+
+        ActionDefinition playAction = gameDataService.getActionDefinition("PLAY");
+        ActionEffects effects = playAction.getEffects();
+        IntUnaryOperator clamp = value -> Math.max(0, Math.min(100, value));
+
+        companion.setHappiness(clamp.applyAsInt(companion.getHappiness() + effects.getHappiness()));
+        companion.setHygiene(clamp.applyAsInt(companion.getHygiene() + effects.getHygiene()));
+        companion.setHunger(clamp.applyAsInt(companion.getHunger() + effects.getHunger()));
+        companion.setEnergy(clamp.applyAsInt(companion.getEnergy() + effects.getEnergy()));
+
+        companion.setNextPlayTimestamp(LocalDateTime.now().plusHours(playAction.getCooldownHours()));
+        companion.setLastStatsUpdateTimestamp(LocalDateTime.now());
+
+        return companionRepository.save(companion);
+    }
+
+    @Transactional
+    public Companion cleanCompanion(Long companionId, String username) {
+        Companion companion = getCompanionByIdAndUsername(companionId, username);
+
+        if (companion.getStatus() != Status.ACTIVE) {
+            throw new ActionUnavailableException("Action 'Clean' is unavailable. Companion status is " + companion.getStatus());
+        }
+        if (companion.getNextCleanTimestamp() != null && LocalDateTime.now().isBefore(companion.getNextCleanTimestamp())) {
+            throw new ActionUnavailableException("Action 'Clean' is on cooldown.");
+        }
+
+        ActionDefinition cleanAction = gameDataService.getActionDefinition("CLEAN");
+        ActionEffects effects = cleanAction.getEffects();
+        IntUnaryOperator clamp = value -> Math.max(0, Math.min(100, value));
+
+        companion.setHygiene(clamp.applyAsInt(companion.getHygiene() + effects.getHygiene()));
+        companion.setHappiness(clamp.applyAsInt(companion.getHappiness() + effects.getHappiness()));
+        companion.setEnergy(clamp.applyAsInt(companion.getEnergy() + effects.getEnergy()));
+
+        companion.setNextCleanTimestamp(LocalDateTime.now().plusHours(cleanAction.getCooldownHours()));
+        companion.setLastStatsUpdateTimestamp(LocalDateTime.now());
+
+        return companionRepository.save(companion);
+    }
+
+    @Transactional
+    public Companion sleepCompanion(Long companionId, String username) {
+        Companion companion = getCompanionByIdAndUsername(companionId, username);
+
+        if (companion.getStatus() != Status.ACTIVE) {
+            throw new ActionUnavailableException("Action 'Sleep' is unavailable. Companion status is " + companion.getStatus());
+        }
+        if (companion.getNextSleepTimestamp() != null && LocalDateTime.now().isBefore(companion.getNextSleepTimestamp())) {
+            throw new ActionUnavailableException("Action 'Sleep' is on cooldown.");
+        }
+
+        ActionDefinition sleepAction = gameDataService.getActionDefinition("SLEEP");
+
+        companion.setEnergy(100);
+
+        companion.setNextSleepTimestamp(LocalDateTime.now().plusHours(sleepAction.getCooldownHours()));
+        companion.setLastStatsUpdateTimestamp(LocalDateTime.now());
+
+        return companionRepository.save(companion);
+    }
 }
