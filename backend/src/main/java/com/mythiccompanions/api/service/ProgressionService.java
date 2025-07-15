@@ -29,12 +29,9 @@ public class ProgressionService {
         if (companion.getStatus() != Status.ACTIVE) {
             throw new ActionUnavailableException("Cannot train: Companion status is " + companion.getStatus());
         }
-        // TODO: Re-enable this check once the equipment system is implemented.
-        /*
         if (companion.getEquippedWeaponId() == null) {
             throw new ActionUnavailableException("Cannot train: No weapon equipped.");
         }
-        */
         if (companion.getNextTrainTimestamp() != null && LocalDateTime.now().isBefore(companion.getNextTrainTimestamp())) {
             throw new ActionUnavailableException("Action 'Train' is on cooldown.");
         }
