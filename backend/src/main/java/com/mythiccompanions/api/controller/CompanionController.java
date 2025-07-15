@@ -2,6 +2,7 @@ package com.mythiccompanions.api.controller;
 
 import com.mythiccompanions.api.dto.*;
 import com.mythiccompanions.api.entity.Companion;
+import com.mythiccompanions.api.model.Universe;
 import com.mythiccompanions.api.service.CompanionService;
 import com.mythiccompanions.api.service.GameDataService;
 import com.mythiccompanions.api.service.ProgressionService;
@@ -107,7 +108,7 @@ public class CompanionController {
         String universeId = gameDataService.getUniverses().stream()
                 .filter(universe -> universe.getSpeciesIds().contains(speciesId))
                 .findFirst()
-                .map(universe -> universe.getId())
+                .map(Universe::getId)
                 .orElse("UNKNOWN_UNIVERSE");
 
         EquippedWeaponDto weaponDto = null;
@@ -123,5 +124,16 @@ public class CompanionController {
                 weaponDto,
                 cooldowns
         );
+    }
+
+    @PostMapping("/{id}/feed")
+    public ResponseEntity<SanctuaryDto> feedCompanion(
+            @PathVariable Long id,
+            @AuthenticationPrincipal UserDetails userDetails) {
+
+        Companion updatedCompanion = companionService.feedCompanion(id, userDetails.getUsername());
+        SanctuaryDto responseDto = convertToSanctuaryDto(updatedCompanion);
+
+        return ResponseEntity.ok(responseDto);
     }
 }

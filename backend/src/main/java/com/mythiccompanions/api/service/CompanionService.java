@@ -3,7 +3,10 @@ package com.mythiccompanions.api.service;
 import com.mythiccompanions.api.dto.CompanionAdoptionDto;
 import com.mythiccompanions.api.entity.Companion;
 import com.mythiccompanions.api.entity.User;
+import com.mythiccompanions.api.exception.ActionUnavailableException;
 import com.mythiccompanions.api.exception.ResourceNotFoundException;
+import com.mythiccompanions.api.model.ActionDefinition;
+import com.mythiccompanions.api.model.ActionEffects;
 import com.mythiccompanions.api.model.Status;
 import com.mythiccompanions.api.repository.CompanionRepository;
 import com.mythiccompanions.api.repository.UserRepository;
@@ -11,9 +14,12 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.IntUnaryOperator;
 
 @Service
 @RequiredArgsConstructor
@@ -67,6 +73,33 @@ public class CompanionService {
         }
 
         gameLoopService.applyPassiveDecay(companion);
+
+        return companionRepository.save(companion);
+    }
+
+    @Transactional
+    public Companion feedCompanion(Long companionId, String username) {
+        Companion companion = getCompanionByIdAndUsername(companionId, username);
+
+        if (companion.getStatus() != Status.ACTIVE) {
+            throw new ActionUnavailableException("Action 'Feed' is unavailable. Companion status is " + companion.getStatus());
+        }
+        if (companion.getNextFeedTimestamp() != null && LocalDateTime.now().isBefore(companion.getNextFeedTimestamp())) {
+            throw new ActionUnavailableException("Action 'Feed' is on cooldown.");
+        }
+
+        ActionDefinition feedAction = gameDataService.getActionDefinition("FEED");
+        ActionEffects effects = feedAction.getEffects();
+
+        IntUnaryOperator clamp = value -> Math.max(0, Math.min(100, value));
+
+        companion.setHunger(clamp.applyAsInt(companion.getHunger() + effects.getHunger()));
+        companion.setHappiness(clamp.applyAsInt(companion.getHappiness() + effects.getHappiness()));
+        companion.setHygiene(clamp.applyAsInt(companion.getHygiene() + effects.getHygiene()));
+        companion.setEnergy(clamp.applyAsInt(companion.getEnergy() + effects.getEnergy()));
+
+        companion.setNextFeedTimestamp(LocalDateTime.now().plusHours(feedAction.getCooldownHours()));
+        companion.setLastStatsUpdateTimestamp(LocalDateTime.now());
 
         return companionRepository.save(companion);
     }

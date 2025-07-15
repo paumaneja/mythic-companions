@@ -2,10 +2,7 @@ package com.mythiccompanions.api.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.mythiccompanions.api.model.GameData;
-import com.mythiccompanions.api.model.GameRules;
-import com.mythiccompanions.api.model.Species;
-import com.mythiccompanions.api.model.Universe;
+import com.mythiccompanions.api.model.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -43,6 +40,10 @@ public class GameDataService {
 
     public GameRules getGameRules() {
         return gameData.getGameRules();
+    }
+
+    public ActionDefinition getActionDefinition(String actionName) {
+        return gameData.getGameRules().getActions().get(actionName);
     }
 
 }

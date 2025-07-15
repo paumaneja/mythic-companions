@@ -145,3 +145,11 @@ game_rules:
     happiness: 3
     hygiene: 4
   sickness_health_decay_per_hour: 10
+  actions:
+    FEED:
+      cooldown_hours: 4
+      effects:
+        hunger: 30
+        happiness: 5
+        hygiene: -2
+        energy: -2
