@@ -2,6 +2,7 @@ package com.mythiccompanions.api.service;
 
 import com.mythiccompanions.api.dto.MinigameResultDto;
 import com.mythiccompanions.api.dto.MinigameRewardDto;
+import com.mythiccompanions.api.dto.RankingDto;
 import com.mythiccompanions.api.dto.SubmitScoreRequestDto;
 import com.mythiccompanions.api.entity.RankingEntry;
 import com.mythiccompanions.api.entity.User;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -85,5 +87,17 @@ public class MinigameService {
             }
         }
         return null;
+    }
+
+    public List<RankingDto> getRanking(String gameId) {
+        List<RankingEntry> rankingEntries = rankingRepository.findTop10ByGameIdOrderByScoreDesc(gameId);
+
+        return rankingEntries.stream()
+                .map(entry -> new RankingDto(
+                        entry.getUser().getUsername(),
+                        entry.getUser().getAvatarUrl(),
+                        entry.getScore()
+                ))
+                .collect(Collectors.toList());
     }
 }
