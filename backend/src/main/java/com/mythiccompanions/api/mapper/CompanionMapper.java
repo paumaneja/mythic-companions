@@ -5,6 +5,7 @@ import com.mythiccompanions.api.entity.Companion;
 import com.mythiccompanions.api.entity.User;
 import com.mythiccompanions.api.model.Universe;
 import com.mythiccompanions.api.service.GameDataService;
+import com.mythiccompanions.api.service.ProgressionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 public class CompanionMapper {
 
     private final GameDataService gameDataService;
+    private final ProgressionService progressionService;
 
     public SanctuaryDto toSanctuaryDto(Companion companion) {
         User user = companion.getUser();
@@ -20,7 +22,7 @@ public class CompanionMapper {
 
         StatsDto stats = new StatsDto(companion.getHealth(), companion.getEnergy(), companion.getHunger(), companion.getHappiness(), companion.getHygiene());
         CooldownsDto cooldowns = new CooldownsDto(companion.getNextFeedTimestamp(), companion.getNextPlayTimestamp(), companion.getNextCleanTimestamp(), companion.getNextSleepTimestamp(), companion.getNextTrainTimestamp());
-        ProgressionDto progression = new ProgressionDto(companion.getExperiencePoints(), 1, companion.getExperiencePoints(), 100); // Placeholder
+        ProgressionDto progression = progressionService.calculateLevel(companion.getExperiencePoints());
 
         SpeciesDto speciesDto = gameDataService.getSpeciesById(speciesId)
                 .map(s -> new SpeciesDto(s.getSpeciesId(), s.getName(), s.getDescription()))

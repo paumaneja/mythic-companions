@@ -1,15 +1,18 @@
 package com.mythiccompanions.api.service;
 
+import com.mythiccompanions.api.dto.ProgressionDto;
 import com.mythiccompanions.api.entity.Companion;
 import com.mythiccompanions.api.exception.ActionUnavailableException;
 import com.mythiccompanions.api.model.ProgressionRules;
 import com.mythiccompanions.api.model.Status;
+import com.mythiccompanions.api.model.XpLevel;
 import com.mythiccompanions.api.repository.CompanionRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -52,5 +55,30 @@ public class ProgressionService {
         return companionRepository.save(companion);
     }
 
-    // TODO: We will implement the 'calculateLevel' method here when we need to display it.
+
+    public ProgressionDto calculateLevel(int totalXp) {
+        List<XpLevel> xpLevels = gameDataService.getProgressionRules().getXpLevels();
+
+        int currentLevel = 0;
+        int xpForCurrentLevel = 0;
+        int xpForNextLevel = 0;
+
+        for (XpLevel levelInfo : xpLevels) {
+            if (totalXp >= levelInfo.getXpRequired()) {
+                currentLevel = levelInfo.getLevel();
+                xpForCurrentLevel = levelInfo.getXpRequired();
+            } else {
+                xpForNextLevel = levelInfo.getXpRequired();
+                break;
+            }
+        }
+
+        if (xpForNextLevel == 0 && currentLevel < xpLevels.size()) {
+            xpForNextLevel = xpLevels.get(currentLevel).getXpRequired();
+        }
+
+        long currentXpInLevel = totalXp - xpForCurrentLevel;
+
+        return new ProgressionDto(totalXp, currentLevel, currentXpInLevel, xpForNextLevel);
+    }
 }
