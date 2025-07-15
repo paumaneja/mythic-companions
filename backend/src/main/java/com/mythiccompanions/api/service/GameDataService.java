@@ -4,10 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.mythiccompanions.api.model.*;
 import jakarta.annotation.PostConstruct;
-import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
@@ -66,5 +64,11 @@ public class GameDataService {
 
     public List<Item> getItems() {
         return gameData.getItems();
+    }
+
+    public Optional<Minigame> getMinigameById(String gameId) {
+        return gameData.getMinigames().stream()
+                .filter(mg -> mg.getId().equals(gameId))
+                .findFirst();
     }
 }

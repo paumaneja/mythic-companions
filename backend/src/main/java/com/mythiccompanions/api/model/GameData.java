@@ -11,11 +11,12 @@ public class GameData {
     private Map<String, UiTheme> uiThemes;
     private List<Universe> universes;
     private List<Species> species;
+    private List<Item> items;
 
     @JsonProperty("game_rules")
     private GameRules gameRules;
 
     private ProgressionRules progression;
 
-    private List<Item> items;
+    private List<Minigame> minigames;
 }

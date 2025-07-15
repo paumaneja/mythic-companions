@@ -472,3 +472,44 @@ progression:
     - { level: 8, xp_required: 6222 }
     - { level: 9, xp_required: 8000 }
     - { level: 10, xp_required: 10000 }
+
+minigames:
+  - id: "CLICKER_GAME"
+    name: "Clicker Game"
+    description: "Click as fast as you can for 15 seconds!"
+    enabled: true
+    rewards:
+      coin_multiplier: 1.5
+      item_loot_chance: 0.30
+      loot_table:
+        - { itemId: "STANDARD_RATION_PACK", weight: 100 }
+        - { itemId: "SIMPLE_TOY", weight: 100 }
+        - { itemId: "NANO_REPAIR_GEL", weight: 100 }
+        - { itemId: "GUMMY_CRITTER", weight: 50 }
+
+  - id: "MEMORY_GAME"
+    name: "Memory Game"
+    description: "Find all the matching pairs."
+    enabled: true
+    rewards:
+      coin_multiplier: 3.0
+      item_loot_chance: 0.20
+      loot_table:
+        - { itemId: "JOGAN_FRUIT", weight: 50 }
+        - { itemId: "MEDPAC", weight: 50 }
+        - { itemId: "RAINBOW_LOLLIPOP", weight: 15 }
+        - { itemId: "ANTIDOTE", weight: 100 }
+
+  - id: "LORE_QUIZ"
+    name: "Lore Quiz"
+    description: "Test your knowledge of the MythicCompanions universe."
+    enabled: true
+    rewards:
+      coin_multiplier: 5.0
+      item_loot_chance: 0.15
+      loot_table:
+        - { itemId: "BACTA_PATCH", weight: 15 }
+        - { itemId: "BLUE_MILK_CARTON", weight: 15 }
+        - { itemId: "MIRACLE_ELIXIR", weight: 15 }
+        - { itemId: "EXOTIC_FRUIT_PLATTER", weight: 5 }
+        - { itemId: "PHOENIX_DOWN", weight: 5 }
