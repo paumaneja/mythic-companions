@@ -2,6 +2,7 @@ package com.mythiccompanions.api.controller;
 
 import com.mythiccompanions.api.dto.*;
 import com.mythiccompanions.api.entity.Companion;
+import com.mythiccompanions.api.mapper.CompanionMapper;
 import com.mythiccompanions.api.model.Universe;
 import com.mythiccompanions.api.service.CompanionService;
 import com.mythiccompanions.api.service.GameDataService;
@@ -25,6 +26,7 @@ public class CompanionController {
     private final CompanionService companionService;
     private final GameDataService gameDataService;
     private final ProgressionService progressionService;
+    private final CompanionMapper companionMapper;
 
     @PostMapping
     public ResponseEntity<CompanionResponseDto> adoptCompanion(
@@ -68,7 +70,7 @@ public class CompanionController {
             @AuthenticationPrincipal UserDetails userDetails) {
 
         Companion companion = companionService.getCompanionByIdAndUsername(id, userDetails.getUsername());
-        SanctuaryDto sanctuaryDto = convertToSanctuaryDto(companion);
+        SanctuaryDto sanctuaryDto = companionMapper.toSanctuaryDto(companion);
 
         return ResponseEntity.ok(sanctuaryDto);
     }
@@ -93,45 +95,12 @@ public class CompanionController {
         );
     }
 
-    private SanctuaryDto convertToSanctuaryDto(Companion companion) {
-        final String speciesId = companion.getSpeciesId();
-        StatsDto stats = new StatsDto(companion.getHealth(), companion.getEnergy(), companion.getHunger(), companion.getHappiness(), companion.getHygiene());
-        CooldownsDto cooldowns = new CooldownsDto(companion.getNextFeedTimestamp(), companion.getNextPlayTimestamp(), companion.getNextCleanTimestamp(), companion.getNextSleepTimestamp(), companion.getNextTrainTimestamp());
-
-        // TODO: Replace with real data from ProgressionService when implemented
-        ProgressionDto progression = new ProgressionDto(companion.getExperiencePoints(), 1, companion.getExperiencePoints(), 100);
-
-        SpeciesDto speciesDto = gameDataService.getSpeciesById(speciesId)
-                .map(s -> new SpeciesDto(s.getSpeciesId(), s.getName(), s.getDescription()))
-                .orElse(null);
-
-        String universeId = gameDataService.getUniverses().stream()
-                .filter(universe -> universe.getSpeciesIds().contains(speciesId))
-                .findFirst()
-                .map(Universe::getId)
-                .orElse("UNKNOWN_UNIVERSE");
-
-        EquippedWeaponDto weaponDto = null;
-
-        return new SanctuaryDto(
-                companion.getId(),
-                companion.getName(),
-                universeId,
-                speciesDto,
-                companion.getStatus(),
-                stats,
-                progression,
-                weaponDto,
-                cooldowns
-        );
-    }
-
     @PostMapping("/{id}/feed")
     public ResponseEntity<SanctuaryDto> feedCompanion(
             @PathVariable Long id,
             @AuthenticationPrincipal UserDetails userDetails) {
             Companion updatedCompanion = companionService.feedCompanion(id, userDetails.getUsername());
-            return ResponseEntity.ok(convertToSanctuaryDto(updatedCompanion));
+            return ResponseEntity.ok(companionMapper.toSanctuaryDto(updatedCompanion));
     }
 
     @PostMapping("/{id}/play")
@@ -139,7 +108,7 @@ public class CompanionController {
             @PathVariable Long id,
             @AuthenticationPrincipal UserDetails userDetails) {
             Companion updatedCompanion = companionService.playWithCompanion(id, userDetails.getUsername());
-            return ResponseEntity.ok(convertToSanctuaryDto(updatedCompanion));
+            return ResponseEntity.ok(companionMapper.toSanctuaryDto(updatedCompanion));
     }
 
     @PostMapping("/{id}/clean")
@@ -147,7 +116,7 @@ public class CompanionController {
             @PathVariable Long id,
             @AuthenticationPrincipal UserDetails userDetails) {
             Companion updatedCompanion = companionService.cleanCompanion(id, userDetails.getUsername());
-            return ResponseEntity.ok(convertToSanctuaryDto(updatedCompanion));
+            return ResponseEntity.ok(companionMapper.toSanctuaryDto(updatedCompanion));
     }
 
     @PostMapping("/{id}/sleep")
@@ -155,7 +124,7 @@ public class CompanionController {
             @PathVariable Long id,
             @AuthenticationPrincipal UserDetails userDetails) {
             Companion updatedCompanion = companionService.sleepCompanion(id, userDetails.getUsername());
-            return ResponseEntity.ok(convertToSanctuaryDto(updatedCompanion));
+            return ResponseEntity.ok(companionMapper.toSanctuaryDto(updatedCompanion));
     }
 
     @PostMapping("/{id}/train")
@@ -163,6 +132,6 @@ public class CompanionController {
             @PathVariable Long id,
             @AuthenticationPrincipal UserDetails userDetails) {
         Companion updatedCompanion = progressionService.trainCompanion(id, userDetails.getUsername());
-        return ResponseEntity.ok(convertToSanctuaryDto(updatedCompanion));
+        return ResponseEntity.ok(companionMapper.toSanctuaryDto(updatedCompanion));
     }
 }
