@@ -157,4 +157,12 @@ public class CompanionController {
             Companion updatedCompanion = companionService.sleepCompanion(id, userDetails.getUsername());
             return ResponseEntity.ok(convertToSanctuaryDto(updatedCompanion));
     }
+
+    @PostMapping("/{id}/train")
+    public ResponseEntity<SanctuaryDto> trainCompanion(
+            @PathVariable Long id,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        Companion updatedCompanion = progressionService.trainCompanion(id, userDetails.getUsername());
+        return ResponseEntity.ok(convertToSanctuaryDto(updatedCompanion));
+    }
 }
