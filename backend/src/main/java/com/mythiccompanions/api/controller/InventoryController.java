@@ -55,7 +55,7 @@ public class InventoryController {
                 itemId,
                 useItemRequest.companionId()
         );
-        
+
         return ResponseEntity.ok(companionMapper.toSanctuaryDto(updatedCompanion));
     }
 }

@@ -38,4 +38,28 @@ public class CompanionMapper {
                 companion.getStatus(), stats, progression, weaponDto, cooldowns
         );
     }
+
+    public CompanionCardDto toCompanionCardDto(Companion companion) {
+        String imageUrl = getCompanionImageUrl(companion); // Reutilitzem la lògica en un mètode privat
+
+        return new CompanionCardDto(
+                companion.getId(),
+                companion.getName(),
+                companion.getSpeciesId(),
+                companion.getStatus(),
+                imageUrl,
+                companion.getEquippedWeaponId()
+        );
+    }
+
+    private String getCompanionImageUrl(Companion companion) {
+        return gameDataService.getSpeciesById(companion.getSpeciesId())
+                .map(species -> {
+                    if (companion.getEquippedWeaponId() != null && species.getAssets().getStaticEquipped() != null) {
+                        return species.getAssets().getStaticEquipped().getOrDefault(companion.getEquippedWeaponId(), species.getAssets().getStaticUnequipped());
+                    }
+                    return species.getAssets().getStaticUnequipped();
+                })
+                .orElse("/assets/companions/default.png");
+    }
 }

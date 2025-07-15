@@ -58,7 +58,7 @@ public class CompanionController {
         List<Companion> companions = companionService.findCompanionsByUsername(userDetails.getUsername());
 
         List<CompanionCardDto> companionCards = companions.stream()
-                .map(this::convertToCompanionCardDto)
+                .map(companionMapper::toCompanionCardDto)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(companionCards);
@@ -73,26 +73,6 @@ public class CompanionController {
         SanctuaryDto sanctuaryDto = companionMapper.toSanctuaryDto(companion);
 
         return ResponseEntity.ok(sanctuaryDto);
-    }
-
-    private CompanionCardDto convertToCompanionCardDto(Companion companion) {
-        String imageUrl = gameDataService.getSpeciesById(companion.getSpeciesId())
-                .map(species -> {
-                    if (companion.getEquippedWeaponId() != null && species.getAssets().getStaticEquipped() != null) {
-                        return species.getAssets().getStaticEquipped().getOrDefault(companion.getEquippedWeaponId(), species.getAssets().getStaticUnequipped());
-                    }
-                    return species.getAssets().getStaticUnequipped();
-                })
-                .orElse("/assets/companions/default.png");
-
-        return new CompanionCardDto(
-                companion.getId(),
-                companion.getName(),
-                companion.getSpeciesId(),
-                companion.getStatus(),
-                imageUrl,
-                companion.getEquippedWeaponId()
-        );
     }
 
     @PostMapping("/{id}/feed")
