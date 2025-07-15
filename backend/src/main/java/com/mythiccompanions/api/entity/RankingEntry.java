@@ -6,9 +6,10 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "ranking_entries", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"user_id", "game_id"})
-})
+@Table(name = "ranking_entries",
+        uniqueConstraints = { @UniqueConstraint(columnNames = {"user_id", "game_id"}) },
+        indexes = { @Index(name = "idx_ranking_game_score", columnList = "game_id, score DESC") }
+)
 @Data
 public class RankingEntry {
 

@@ -8,7 +8,9 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "companions")
+@Table(name = "companions", indexes = {
+        @Index(name = "idx_companion_user", columnList = "user_id")
+})
 @Getter
 @Setter
 public class Companion {

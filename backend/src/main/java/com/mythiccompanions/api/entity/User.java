@@ -9,7 +9,10 @@ import lombok.AllArgsConstructor;
 import java.util.Set;
 
 @Entity
-@Table(name = "users") // This explicitly names the table in the database
+@Table(name = "users", indexes = {
+        @Index(name = "idx_user_username", columnList = "username"),
+        @Index(name = "idx_user_email", columnList = "email")
+})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,7 +20,7 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incrementing ID
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
