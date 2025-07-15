@@ -63,4 +63,8 @@ public class GameDataService {
                 .filter(item -> item.getItemId().equals(itemId))
                 .findFirst();
     }
+
+    public List<Item> getItems() {
+        return gameData.getItems();
+    }
 }
