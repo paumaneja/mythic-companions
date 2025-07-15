@@ -47,6 +47,18 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(ItemNotForSaleException.class)
+    public ResponseEntity<?> handleItemNotForSaleException(ItemNotForSaleException ex, WebRequest request) {
+        Map<String, String> body = Map.of("error", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NotEnoughCoinsException.class)
+    public ResponseEntity<?> handleNotEnoughCoinsException(NotEnoughCoinsException ex, WebRequest request) {
+        Map<String, String> body = Map.of("error", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.PAYMENT_REQUIRED);
+    }
+
     // A general handler for all other exceptions
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGlobalException(Exception ex, WebRequest request) {
