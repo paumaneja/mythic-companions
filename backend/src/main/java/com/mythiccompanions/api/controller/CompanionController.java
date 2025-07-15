@@ -2,7 +2,6 @@ package com.mythiccompanions.api.controller;
 
 import com.mythiccompanions.api.dto.*;
 import com.mythiccompanions.api.entity.Companion;
-import com.mythiccompanions.api.exception.ActionUnavailableException;
 import com.mythiccompanions.api.model.Universe;
 import com.mythiccompanions.api.service.CompanionService;
 import com.mythiccompanions.api.service.GameDataService;
@@ -16,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -129,50 +127,34 @@ public class CompanionController {
     }
 
     @PostMapping("/{id}/feed")
-    public ResponseEntity<?> feedCompanion(
+    public ResponseEntity<SanctuaryDto> feedCompanion(
             @PathVariable Long id,
             @AuthenticationPrincipal UserDetails userDetails) {
-        try {
             Companion updatedCompanion = companionService.feedCompanion(id, userDetails.getUsername());
             return ResponseEntity.ok(convertToSanctuaryDto(updatedCompanion));
-        } catch (ActionUnavailableException | IllegalStateException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", e.getMessage()));
-        }
     }
 
     @PostMapping("/{id}/play")
-    public ResponseEntity<?> playWithCompanion(
+    public ResponseEntity<SanctuaryDto> playWithCompanion(
             @PathVariable Long id,
             @AuthenticationPrincipal UserDetails userDetails) {
-        try {
             Companion updatedCompanion = companionService.playWithCompanion(id, userDetails.getUsername());
             return ResponseEntity.ok(convertToSanctuaryDto(updatedCompanion));
-        } catch (ActionUnavailableException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", e.getMessage()));
-        }
     }
 
     @PostMapping("/{id}/clean")
-    public ResponseEntity<?> cleanCompanion(
+    public ResponseEntity<SanctuaryDto> cleanCompanion(
             @PathVariable Long id,
             @AuthenticationPrincipal UserDetails userDetails) {
-        try {
             Companion updatedCompanion = companionService.cleanCompanion(id, userDetails.getUsername());
             return ResponseEntity.ok(convertToSanctuaryDto(updatedCompanion));
-        } catch (ActionUnavailableException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", e.getMessage()));
-        }
     }
 
     @PostMapping("/{id}/sleep")
-    public ResponseEntity<?> sleepCompanion(
+    public ResponseEntity<SanctuaryDto> sleepCompanion(
             @PathVariable Long id,
             @AuthenticationPrincipal UserDetails userDetails) {
-        try {
             Companion updatedCompanion = companionService.sleepCompanion(id, userDetails.getUsername());
             return ResponseEntity.ok(convertToSanctuaryDto(updatedCompanion));
-        } catch (ActionUnavailableException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", e.getMessage()));
-        }
     }
 }
