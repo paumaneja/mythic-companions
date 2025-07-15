@@ -3,6 +3,7 @@ package com.mythiccompanions.api.mapper;
 import com.mythiccompanions.api.dto.*;
 import com.mythiccompanions.api.entity.Companion;
 import com.mythiccompanions.api.entity.User;
+import com.mythiccompanions.api.model.Universe;
 import com.mythiccompanions.api.service.GameDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -28,19 +29,35 @@ public class CompanionMapper {
         String universeId = gameDataService.getUniverses().stream()
                 .filter(universe -> universe.getSpeciesIds().contains(speciesId))
                 .findFirst()
-                .map(universe -> universe.getId())
+                .map(Universe::getId)
                 .orElse("UNKNOWN_UNIVERSE");
 
-        EquippedWeaponDto weaponDto = null; // TODO: Implement when equipment is done
+        EquippedWeaponDto weaponDto = null;
+        if (companion.getEquippedWeaponId() != null) {
+            weaponDto = gameDataService.getItemById(companion.getEquippedWeaponId())
+                    .map(itemData -> new EquippedWeaponDto(
+                            itemData.getItemId(),
+                            itemData.getName(),
+                            itemData.getImageUrl()
+                    ))
+                    .orElse(null);
+        }
 
         return new SanctuaryDto(
-                companion.getId(), companion.getName(), universeId, speciesDto,
-                companion.getStatus(), stats, progression, weaponDto, cooldowns
+                companion.getId(),
+                companion.getName(),
+                universeId,
+                speciesDto,
+                companion.getStatus(),
+                stats,
+                progression,
+                weaponDto,
+                cooldowns
         );
     }
 
     public CompanionCardDto toCompanionCardDto(Companion companion) {
-        String imageUrl = getCompanionImageUrl(companion); // Reutilitzem la lògica en un mètode privat
+        String imageUrl = getCompanionImageUrl(companion);
 
         return new CompanionCardDto(
                 companion.getId(),
