@@ -59,6 +59,12 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.PAYMENT_REQUIRED);
     }
 
+    @ExceptionHandler(StorageException.class)
+    public ResponseEntity<?> handleStorageException(StorageException ex, WebRequest request) {
+        Map<String, String> body = Map.of("error", "A file storage error occurred: " + ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     // A general handler for all other exceptions
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGlobalException(Exception ex, WebRequest request) {
