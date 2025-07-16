@@ -19,3 +19,26 @@ export type CompanionCardDto = {
   imageUrl: string;
   equippedWeaponId: string | null;
 };
+
+export type Universe = {
+    id: string;
+    name: string;
+    speciesIds: string[];
+};
+
+export type Species = {
+    speciesId: string;
+    name: string;
+    description: string;
+};
+
+export type AdoptionSpeciesDto = {
+    speciesId: string;
+    name: string;
+};
+
+export type AdoptionUniverseDto = {
+    universeId: string;
+    name: string;
+    species: AdoptionSpeciesDto[];
+};

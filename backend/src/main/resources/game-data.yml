@@ -25,7 +25,7 @@ universes:
 species:
   - speciesId: "JEDI"
     name: "Jedi"
-    description: "Un guardià de la pau i la justícia a la galàxia."
+    description: "A guardian of peace and justice in the galaxy."
     allowedWeaponTypes: ["LIGHTSABER", "FORCE_GLOVE", "BLASTER"]
     assets:
       static_unequipped: "/assets/companions/jedi/static_default.png"
@@ -44,7 +44,7 @@ species:
           BLASTER: "/assets/companions/jedi/train_blaster.mp4"
   - speciesId: "EWOK"
     name: "Ewok"
-    description: "Un habitant pelut i curiós dels boscos d'Endor."
+    description: "A furry and curious inhabitant of the forests of Endor."
     allowedWeaponTypes: ["SPEAR", "SLINGSHOT", "NET"]
     assets:
       static_unequipped: "/assets/companions/ewok/static_default.png"
@@ -63,7 +63,7 @@ species:
           NET: "/assets/companions/ewok/train_net.mp4"
   - speciesId: "SERVICE_DROID"
     name: "Service Droid"
-    description: "Un autòmat servicial, ple de sorpreses i eines útils."
+    description: "A helpful automaton, full of surprises and useful tools."
     allowedWeaponTypes: [ "SHOCK_ARM", "TOOL_HAND", "DATA_SPIKE" ]
     assets:
       static_unequipped: "/assets/companions/service_droid/static_default.png"
@@ -82,7 +82,7 @@ species:
           DATA_SPIKE: "/assets/companions/service_droid/train_data_spike.mp4"
   - speciesId: "CAT"
     name: "Cat"
-    description: "Elegant, independent i expert en l'art de la migdiada."
+    description: "Elegant, independent and expert in the art of the nap."
     allowedWeaponTypes: ["PLUSH_PAW", "PURR_MELODY", "SLEEPY_YAWN"]
     assets:
       static_unequipped: "/assets/companions/cat/static_default.png"
@@ -101,7 +101,7 @@ species:
           SLEEPY_YAWN: "/assets/companions/cat/train_sleepy_yawn.mp4"
   - speciesId: "BUNNY"
     name: "Bunny"
-    description: "Una bola de pèl energètica que es mou a salts d'alegria."
+    description: "An energetic ball of hair that moves in leaps and bounds."
     allowedWeaponTypes: ["BOUNCY_IMPACT", "PUFF_OF_FLUFF", "BOUNCING_WAVE"]
     assets:
       static_unequipped: "/assets/companions/bunny/static_default.png"
@@ -120,7 +120,7 @@ species:
           BOUNCING_WAVE: "/assets/companions/bunny/train_bouncing_wave.mp4"
   - speciesId: "UNICORN"
     name: "Unicorn"
-    description: "Una criatura mítica la banya de la qual brilla amb màgia."
+    description: "A mythical creature whose horn glows with magic."
     allowedWeaponTypes: [ "GLITTER_BEAM", "DREAM_DUST", "RAINBOW_WAVE" ]
     assets:
       static_unequipped: "/assets/companions/unicorn/static_default.png"

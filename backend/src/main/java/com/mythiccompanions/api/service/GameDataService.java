@@ -2,6 +2,8 @@ package com.mythiccompanions.api.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.mythiccompanions.api.dto.AdoptionSpeciesDto;
+import com.mythiccompanions.api.dto.AdoptionUniverseDto;
 import com.mythiccompanions.api.model.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.core.io.Resource;
@@ -13,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +33,7 @@ public class GameDataService {
         }
     }
 
-    public List<Species> getAllSpecies() {
+    public List<Species> getSpecies() {
         return gameData.getSpecies();
     }
 
@@ -70,5 +73,18 @@ public class GameDataService {
         return gameData.getMinigames().stream()
                 .filter(mg -> mg.getId().equals(gameId))
                 .findFirst();
+    }
+
+    public List<AdoptionUniverseDto> getAdoptionOptions() {
+        return getUniverses().stream()
+                .map(universe -> {
+                    List<AdoptionSpeciesDto> speciesInUniverse = getSpecies().stream()
+                            .filter(species -> universe.getSpeciesIds().contains(species.getSpeciesId()))
+                            .map(species -> new AdoptionSpeciesDto(species.getSpeciesId(), species.getName()))
+                            .collect(Collectors.toList());
+
+                    return new AdoptionUniverseDto(universe.getId(), universe.getName(), speciesInUniverse);
+                })
+                .collect(Collectors.toList());
     }
 }
