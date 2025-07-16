@@ -14,7 +14,7 @@ const getInitialState = () => {
     const token = localStorage.getItem('authToken');
     const userJson = localStorage.getItem('authUser');
 
-    if (token && userJson && userJson !== 'undefined' && userJson !== 'null') {
+    if (token && token !== 'undefined' && userJson && userJson !== 'undefined') {
       const user = JSON.parse(userJson) as UserDto;
       return { token, user, isAuthenticated: true };
     }

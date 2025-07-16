@@ -21,7 +21,7 @@ export default function LoginPage() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
 
   const loginMutation = useMutation<LoginResponseDto, AxiosError<ApiError>, FormData>({
-    mutationFn: (data: FormData) => apiClient.post('/auth/login', data),
+    mutationFn: (data: FormData) => apiClient.post('/auth/login', data).then(res => res.data),
     onSuccess: (data) => {
       setToken(data.token, data.user);
       navigate('/school'); 

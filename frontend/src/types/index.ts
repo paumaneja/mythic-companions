@@ -10,3 +10,12 @@ export type LoginResponseDto = {
   token: string;
   user: UserDto;
 };
+
+export type CompanionCardDto = {
+  id: number;
+  name: string;
+  speciesId: string;
+  status: 'ACTIVE' | 'SICK' | 'HOSPITALIZED';
+  imageUrl: string;
+  equippedWeaponId: string | null;
+};
