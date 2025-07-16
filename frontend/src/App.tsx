@@ -1,23 +1,29 @@
 import { Routes, Route } from 'react-router-dom';
-import MainLayout from './components/layout/MainLayout';
 import AuthLayout from './components/layout/AuthLayout';
+import PrivateLayout from './components/layout/PrivateLayout';
+import ProtectedRoute from './components/ProtectedRoute';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 
+const SchoolPage = () => <h1 className="text-3xl font-bold">My Companions (School Page)</h1>;
+
 function App() {
   return (
     <Routes>
-      {/* Rutes Públiques amb fons i centrat especial */}
+      {/* Public routes */}
       <Route element={<AuthLayout />}>
-        <Route path="login" element={<LoginPage />} />
-        <Route path="register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Route>
+      <Route path="/" element={<HomePage />} />
 
-      {/* Rutes Principals amb la barra de navegació superior */}
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<HomePage />} />
-        {/* Altres rutes privades (com /school) aniran aquí dins */}
+      {/* Private routes */}
+      <Route element={<ProtectedRoute />}>
+        <Route element={<PrivateLayout />}>
+          <Route path="/school" element={<SchoolPage />} />
+          {/* Altres rutes privades aniran aquí */}
+        </Route>
       </Route>
     </Routes>
   );

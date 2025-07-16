@@ -14,13 +14,12 @@ const getInitialState = () => {
     const token = localStorage.getItem('authToken');
     const userJson = localStorage.getItem('authUser');
 
-    if (token && userJson && userJson !== 'undefined') {
+    if (token && userJson && userJson !== 'undefined' && userJson !== 'null') {
       const user = JSON.parse(userJson) as UserDto;
       return { token, user, isAuthenticated: true };
     }
   } catch (error) {
-    console.error("Failed to parse auth user from localStorage", error);
-    return { token: null, user: null, isAuthenticated: false };
+    console.error("Failed to parse auth user from localStorage, resetting state.", error);
   }
 
   return { token: null, user: null, isAuthenticated: false };
