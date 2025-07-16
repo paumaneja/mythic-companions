@@ -5,9 +5,9 @@ const MainLayout = () => {
     <div>
       {/* TODO: Navbar will go here */}
       <header className="bg-gray-800 text-white p-4">
-        MythicCompanions
+        Welcome to MythicCompanions
       </header>
-      <main className="p-4">
+      <main>
         <Outlet /> {/* Child pages will be rendered here */}
       </main>
     </div>
