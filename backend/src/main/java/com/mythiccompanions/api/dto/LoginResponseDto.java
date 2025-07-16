@@ -1,5 +1,6 @@
 package com.mythiccompanions.api.dto;
 
 public record LoginResponseDto(
-        String token
+        String token,
+        UserDto user
 ) {}

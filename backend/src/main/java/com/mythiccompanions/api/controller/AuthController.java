@@ -5,6 +5,7 @@ import com.mythiccompanions.api.dto.LoginResponseDto;
 import com.mythiccompanions.api.dto.UserDto;
 import com.mythiccompanions.api.dto.UserRegistrationDto;
 import com.mythiccompanions.api.entity.User;
+import com.mythiccompanions.api.exception.ResourceNotFoundException;
 import com.mythiccompanions.api.security.JwtTokenProvider;
 import com.mythiccompanions.api.service.UserService;
 import jakarta.validation.Valid;
@@ -51,9 +52,22 @@ public class AuthController {
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         String token = tokenProvider.generateToken(authentication);
 
-        return ResponseEntity.ok(new LoginResponseDto(token));
+        org.springframework.security.core.userdetails.User springUser =
+                (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
+
+        User ourUser = userService.findByUsername(springUser.getUsername())
+                .orElseThrow(() -> new ResourceNotFoundException("User not found after login"));
+
+        UserDto userDto = new UserDto(
+                ourUser.getId(),
+                ourUser.getUsername(),
+                ourUser.getEmail(),
+                ourUser.getAvatarUrl(),
+                ourUser.getMythicCoins()
+        );
+
+        return ResponseEntity.ok(new LoginResponseDto(token, userDto));
     }
 }

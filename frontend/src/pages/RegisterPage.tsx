@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import apiClient from '../lib/apiClient';
 import { isAxiosError, type AxiosError } from 'axios';
 import type { UserDto } from '../types';
-import AuthBackgroundImage from '../assets/images/auth-background.jpg';
 
 type FormData = {
   username: string;
@@ -42,9 +41,7 @@ export default function RegisterPage() {
   };
 
   return (
-        <div className="min-h-screen flex items-center justify-center p-4 bg-cover bg-center"
-             style={{ backgroundImage: `url(${AuthBackgroundImage})` }}>
-      <div className="p-8 max-w-md w-full bg-white rounded-lg shadow-md">
+      <div className="p-8 max-w-md w-full bg-white/40 backdrop-blur-md rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Create Your Account</h2>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <div className="mb-4">
@@ -103,6 +100,5 @@ export default function RegisterPage() {
           </button>
         </form>
       </div>
-    </div>
   );
 }

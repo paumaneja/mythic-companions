@@ -5,3 +5,8 @@ export type UserDto = {
   avatarUrl: string | null;
   mythicCoins: number;
 };
+
+export type LoginResponseDto = {
+  token: string;
+  user: UserDto;
+};

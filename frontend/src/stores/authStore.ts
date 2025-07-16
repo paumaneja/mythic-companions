@@ -10,11 +10,20 @@ interface AuthState {
 }
 
 const getInitialState = () => {
-  const token = localStorage.getItem('authToken');
-  const userJson = localStorage.getItem('authUser');
-  const user = userJson ? (JSON.parse(userJson) as UserDto) : null;
+  try {
+    const token = localStorage.getItem('authToken');
+    const userJson = localStorage.getItem('authUser');
 
-  return { token, user, isAuthenticated: !!token };
+    if (token && userJson && userJson !== 'undefined') {
+      const user = JSON.parse(userJson) as UserDto;
+      return { token, user, isAuthenticated: true };
+    }
+  } catch (error) {
+    console.error("Failed to parse auth user from localStorage", error);
+    return { token: null, user: null, isAuthenticated: false };
+  }
+
+  return { token: null, user: null, isAuthenticated: false };
 };
 
 export const useAuthStore = create<AuthState>((set) => ({
