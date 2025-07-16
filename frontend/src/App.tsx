@@ -5,24 +5,25 @@ import ProtectedRoute from './components/ProtectedRoute';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-
-const SchoolPage = () => <h1 className="text-3xl font-bold">My Companions (School Page)</h1>;
+import SchoolPage from './pages/SchoolPage';
 
 function App() {
   return (
     <Routes>
-      {/* Public routes */}
+      {/* Public route for the landing page */}
+      <Route path="/" element={<HomePage />} />
+
+      {/* Public routes for authentication, using the AuthLayout */}
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Route>
-      <Route path="/" element={<HomePage />} />
 
-      {/* Private routes */}
+      {/* Private routes, guarded by ProtectedRoute and using PrivateLayout */}
       <Route element={<ProtectedRoute />}>
         <Route element={<PrivateLayout />}>
           <Route path="/school" element={<SchoolPage />} />
-          {/* Altres rutes privades aniran aquí */}
+          {/* Future private routes like /shop or /inventory will go here */}
         </Route>
       </Route>
     </Routes>

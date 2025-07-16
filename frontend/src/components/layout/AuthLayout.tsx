@@ -4,7 +4,7 @@ import AuthBackgroundImage from '../../assets/images/auth-background.jpg';
 const AuthLayout = () => {
   return (
     <div
-      className="min-h-screen flex items-center justify-center p-4 bg-cover bg-center"
+      className="min-h-screen flex items-center justify-center p-4 bg-gray-900 bg-cover bg-center"
       style={{ backgroundImage: `url(${AuthBackgroundImage})` }}
     >
       <Outlet />

@@ -1,1 +1,1 @@
-export default function HomePage() { return <div>Home Page</div>; }
+export default function HomePage() { return <h1 className="text-3xl">Welcome to MythicCompanions!</h1>; }
