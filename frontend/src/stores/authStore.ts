@@ -22,6 +22,8 @@ const getInitialState = () => {
     console.error("Failed to parse auth user from localStorage, resetting state.", error);
   }
 
+  localStorage.removeItem('authToken');
+  localStorage.removeItem('authUser');
   return { token: null, user: null, isAuthenticated: false };
 };
 
