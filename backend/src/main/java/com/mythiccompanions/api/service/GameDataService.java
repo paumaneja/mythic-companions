@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -86,5 +87,9 @@ public class GameDataService {
                     return new AdoptionUniverseDto(universe.getId(), universe.getName(), speciesInUniverse);
                 })
                 .collect(Collectors.toList());
+    }
+
+    public Map<String, UiTheme> getUiThemes() {
+        return gameData.getUiThemes();
     }
 }

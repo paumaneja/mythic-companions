@@ -2,6 +2,7 @@ package com.mythiccompanions.api.controller;
 
 import com.mythiccompanions.api.dto.AdoptionUniverseDto;
 import com.mythiccompanions.api.model.Species;
+import com.mythiccompanions.api.model.UiTheme;
 import com.mythiccompanions.api.model.Universe;
 import com.mythiccompanions.api.service.GameDataService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/game-data")
@@ -34,4 +36,8 @@ public class GameDataController {
         return ResponseEntity.ok(gameDataService.getAdoptionOptions());
     }
 
+    @GetMapping("/ui-themes")
+    public ResponseEntity<Map<String, UiTheme>> getUiThemes() {
+        return ResponseEntity.ok(gameDataService.getUiThemes());
+    }
 }

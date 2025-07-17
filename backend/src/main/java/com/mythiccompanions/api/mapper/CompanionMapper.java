@@ -25,7 +25,7 @@ public class CompanionMapper {
         ProgressionDto progression = progressionService.calculateLevel(companion.getExperiencePoints());
 
         SpeciesDto speciesDto = gameDataService.getSpeciesById(speciesId)
-                .map(s -> new SpeciesDto(s.getSpeciesId(), s.getName(), s.getDescription()))
+                .map(s -> new SpeciesDto(s.getSpeciesId(), s.getName(), s.getDescription(), s.getAssets()))
                 .orElse(null);
 
         String universeId = gameDataService.getUniverses().stream()

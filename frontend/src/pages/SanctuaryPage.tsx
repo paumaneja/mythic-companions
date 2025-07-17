@@ -2,30 +2,13 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import apiClient from '../lib/apiClient';
 import { useAuthStore } from '../stores/authStore';
-import type { SanctuaryDto, ProgressionDto, EquippedWeaponDto } from '../types';
+import type { SanctuaryDto } from '../types';
 import StatsPanel from '../components/sanctuary/StatsPanel';
+import ProgressionPanel from '../components/sanctuary/ProgressionPanel';
+import WeaponPanel from '../components/sanctuary/WeaponPanel';
+import CompanionVisualizer from '../components/sanctuary/CompanionVisualizer';
+import ActionBar from '../components/sanctuary/ActionBar';
 
-
-const ProgressionPanel = ({ progression }: { progression: ProgressionDto }) => (
-    <div className="bg-white p-4 rounded-lg shadow">
-        <h2 className="text-xl font-bold mb-2">Progression</h2>
-        <p>Level: {progression.level}</p>
-        <p>XP: {progression.currentXpInLevel} / {progression.xpForNextLevel}</p>
-    </div>
-);
-
-const WeaponPanel = ({ weapon }: { weapon: EquippedWeaponDto | null }) => (
-    <div className="bg-white p-4 rounded-lg shadow">
-        <h2 className="text-xl font-bold mb-2">Weapon</h2>
-        <p>{weapon ? weapon.name : 'No weapon equipped'}</p>
-    </div>
-);
-
-const CompanionVisualizer = ({ companion }: { companion: SanctuaryDto }) => (
-    <div className="bg-white p-4 rounded-lg shadow col-span-2 min-h-[400px]">
-        Companion Visualizer for {companion.name}
-    </div>
-);
 
 const fetchCompanionDetails = async (id: string, token: string | null): Promise<SanctuaryDto> => {
   if (!token) throw new Error('Not authenticated');
@@ -57,12 +40,13 @@ export default function SanctuaryPage() {
         <div className="lg:col-span-1 space-y-6">
           <StatsPanel stats={companion.stats} />
           <ProgressionPanel progression={companion.progression} />
-          <WeaponPanel weapon={companion.equippedWeapon} />
+          <WeaponPanel weapon={companion.equippedWeapon} companionId={companion.id} />
         </div>
 
         {/* Right Column (Wider) */}
         <div className="lg:col-span-2">
           <CompanionVisualizer companion={companion} />
+          <ActionBar companion={companion} />
         </div>
       </div>
     </div>

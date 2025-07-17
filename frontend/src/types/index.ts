@@ -43,11 +43,31 @@ export type AdoptionUniverseDto = {
     species: AdoptionSpeciesDto[];
 };
 
+export type ActionAssetDetails = {
+  feed: string;
+  play: string;
+  sleep: string;
+  clean: string;
+  train: Record<string, string>;
+};
+
+export type SpeciesAssets = {
+  static_unequipped: string;
+  static_equipped: Record<string, string>;
+  actions: ActionAssetDetails;
+};
+
+export type SpeciesDto = {
+  id: string;
+  name: string;
+  description: string;
+  assets: SpeciesAssets;
+};
+
 export type StatsDto = { health: number; energy: number; hunger: number; happiness: number; hygiene: number; };
 export type ProgressionDto = { totalXp: number; level: number; currentXpInLevel: number; xpForNextLevel: number; };
 export type EquippedWeaponDto = { itemId: string; name: string; imageUrl: string; };
 export type CooldownsDto = { feed: string | null; play: string | null; clean: string | null; sleep: string | null; train: string | null; };
-export type SpeciesDto = { id: string; name: string; description: string; };
 
 export type SanctuaryDto = {
   id: number;
@@ -59,4 +79,16 @@ export type SanctuaryDto = {
   progression: ProgressionDto;
   equippedWeapon: EquippedWeaponDto | null;
   cooldowns: CooldownsDto;
+};
+
+export type ActionIcons = {
+  feed: string;
+  play: string;
+  clean: string;
+  sleep: string;
+  train: string;
+};
+
+export type UiTheme = {
+  action_icons: ActionIcons;
 };
