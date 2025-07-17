@@ -45,21 +45,18 @@ export default function CompanionAdoptionCard({ existingSpeciesIds }: Props) {
   const availableSpecies = selectedUniverse?.species.filter(s => !existingSpeciesIds.includes(s.speciesId));
 
   return (
-    <div className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg p-4 flex flex-col justify-between">
-      <h3 className="text-xl font-bold text-gray-800 mb-2">Adopt New Companion</h3>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-3">
-        <input {...register('name', { required: true })} placeholder="Companion Name" className="p-2 border rounded" />
-
+    <div className="bg-gray-800/50 border-2 border-dashed border-gray-300 rounded-lg p-4 flex flex-col justify-between">
+      <h3 className="text-xl font-bold text-gray-800 mb-2 text-center">Adopt</h3>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-3 justify-between">
         <select value={selectedUniverseId} onChange={(e) => setSelectedUniverseId(e.target.value)} className="p-2 border rounded">
           <option value="" disabled>1. Select a Universe</option>
           {isLoading ? <option>Loading...</option> : adoptionOptions?.map(u => <option key={u.universeId} value={u.universeId}>{u.name}</option>)}
         </select>
-
         <select {...register('speciesId', { required: true })} disabled={!selectedUniverseId} className="p-2 border rounded disabled:bg-gray-200">
           <option value="" disabled>2. Select a Species</option>
           {availableSpecies?.map(s => <option key={s.speciesId} value={s.speciesId}>{s.name}</option>)}
         </select>
-
+        <input {...register('name', { required: true })} placeholder="Companion Name" className="p-2 border rounded" />
         <button type="submit" className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded" disabled={adoptMutation.isPending}>
           {adoptMutation.isPending ? 'Adopting...' : 'Adopt'}
         </button>

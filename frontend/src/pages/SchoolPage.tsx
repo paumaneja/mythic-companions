@@ -4,6 +4,7 @@ import type { CompanionCardDto } from '../types';
 import { useAuthStore } from '../stores/authStore';
 import CompanionCard from '../components/companions/CompanionCard';
 import CompanionAdoptionCard from '../components/companions/CompanionAdoptionCard';
+import SchoolBackgroundImage from '../assets/images/school-background.jpg';
 
 const fetchCompanions = async (token: string | null): Promise<CompanionCardDto[]> => {
   if (!token) return [];
@@ -25,16 +26,18 @@ export default function SchoolPage() {
   const existingSpeciesIds = companions ? companions.map(c => c.speciesId) : [];
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Your Companions</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {companions?.map((companion) => (
-          <CompanionCard key={companion.id} companion={companion} />
-        ))}
-        {/* We render the adoption card if the user has less than 6 companions */}
-        {companions && companions.length < 6 && (
-          <CompanionAdoptionCard existingSpeciesIds={existingSpeciesIds} />
-        )}
+    <div className="p-6 bg-cover bg-center min-h-full" style={{ backgroundImage: `url(${SchoolBackgroundImage})` }}>
+      <div className="container mx-auto p-8">
+        <h1 className="text-center text-3xl font-bold mb-6 p-6 text-gray-800">Your Companions</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
+          {companions?.map((companion) => (
+            <CompanionCard key={companion.id} companion={companion} />
+          ))}
+          {/* We render the adoption card if the user has less than 6 companions */}
+          {companions && companions.length < 6 && (
+            <CompanionAdoptionCard existingSpeciesIds={existingSpeciesIds} />
+          )}
+        </div>
       </div>
     </div>
   );
