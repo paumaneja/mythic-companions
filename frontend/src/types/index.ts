@@ -42,3 +42,21 @@ export type AdoptionUniverseDto = {
     name: string;
     species: AdoptionSpeciesDto[];
 };
+
+export type StatsDto = { health: number; energy: number; hunger: number; happiness: number; hygiene: number; };
+export type ProgressionDto = { totalXp: number; level: number; currentXpInLevel: number; xpForNextLevel: number; };
+export type EquippedWeaponDto = { itemId: string; name: string; imageUrl: string; };
+export type CooldownsDto = { feed: string | null; play: string | null; clean: string | null; sleep: string | null; train: string | null; };
+export type SpeciesDto = { id: string; name: string; description: string; };
+
+export type SanctuaryDto = {
+  id: number;
+  name: string;
+  universeId: string;
+  species: SpeciesDto;
+  status: 'ACTIVE' | 'SICK' | 'HOSPITALIZED';
+  stats: StatsDto;
+  progression: ProgressionDto;
+  equippedWeapon: EquippedWeaponDto | null;
+  cooldowns: CooldownsDto;
+};
