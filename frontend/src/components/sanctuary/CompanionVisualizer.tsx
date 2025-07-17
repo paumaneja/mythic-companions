@@ -2,22 +2,32 @@ import type { SanctuaryDto } from '../../types';
 
 interface Props {
   companion: SanctuaryDto;
+  playingVideoUrl: string | null;
+  onVideoEnd: () => void;
 }
 
-export default function CompanionVisualizer({ companion }: Props) {
-  // Determina la URL de la imatge correcta (equipat vs. desequipat)
+export default function CompanionVisualizer({ companion, playingVideoUrl, onVideoEnd }: Props) {
   const imageUrl = companion.equippedWeapon
     ? companion.species.assets.static_equipped[companion.equippedWeapon.itemId]
     : companion.species.assets.static_unequipped;
 
   return (
     <div className="relative flex h-full min-h-[400px] items-center justify-center rounded-lg bg-white/70 p-4 shadow-lg backdrop-blur-md">
-      {/* TODO: Lògica per canviar entre imatge i vídeo */}
+      {playingVideoUrl ? (
+        <video
+          key={playingVideoUrl}
+          src={'/src' + playingVideoUrl}
+          autoPlay
+          onEnded={onVideoEnd}
+          className="max-w-full max-h-96"
+        />
+      ) : (
       <img 
         src={'/src' + imageUrl} 
         alt={companion.name} 
         className="max-h-96 max-w-full"
       />
+      )}
 
       {/* Icones d'estat sobreimpreses */}
       {companion.status === 'SICK' && (

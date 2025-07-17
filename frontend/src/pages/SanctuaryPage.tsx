@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import apiClient from '../lib/apiClient';
 import { useAuthStore } from '../stores/authStore';
 import type { SanctuaryDto } from '../types';
@@ -19,6 +20,7 @@ const fetchCompanionDetails = async (id: string, token: string | null): Promise<
 };
 
 export default function SanctuaryPage() {
+  const [playingVideoUrl, setPlayingVideoUrl] = useState<string | null>(null);
   const { id } = useParams<{ id: string }>();
   const token = useAuthStore((state) => state.token);
 
@@ -45,8 +47,15 @@ export default function SanctuaryPage() {
 
         {/* Right Column (Wider) */}
         <div className="lg:col-span-2">
-          <CompanionVisualizer companion={companion} />
-          <ActionBar companion={companion} />
+          <CompanionVisualizer 
+            companion={companion} 
+            playingVideoUrl={playingVideoUrl}
+            onVideoEnd={() => setPlayingVideoUrl(null)}
+          />
+          <ActionBar 
+            companion={companion} 
+            onActionStart={(videoUrl) => setPlayingVideoUrl(videoUrl)}
+          />
         </div>
       </div>
     </div>

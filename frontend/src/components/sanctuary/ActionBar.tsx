@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import apiClient from '../../lib/apiClient';
 import type { SanctuaryDto, UiTheme } from '../../types';
-//import { useAuthStore } from '../../stores/authStore';
+import { useFeedCompanion, usePlayWithCompanion, useCleanCompanion, useSleepCompanion, useTrainCompanion } from '../../hooks/useCompanionActions';
 
 interface Props {
   companion: SanctuaryDto;
+  onActionStart: (actionVideoUrl: string) => void;
 }
 
 // Funció per obtenir les dades de les icones
@@ -13,12 +14,42 @@ const fetchUiThemes = async (): Promise<Record<string, UiTheme>> => {
   return data;
 };
 
-export default function ActionBar({ companion }: Props) {
+export default function ActionBar({ companion, onActionStart }: Props) {
   const { data: uiThemes } = useQuery({ queryKey: ['uiThemes'], queryFn: fetchUiThemes });
 
-  const handleActionClick = (action: string) => {
-    console.log(`Action clicked: ${action} for companion ${companion.id}`);
-    // TODO: Implement useMutation for each action
+  const feedMutation = useFeedCompanion();
+  const playMutation = usePlayWithCompanion();
+  const cleanMutation = useCleanCompanion();
+  const sleepMutation = useSleepCompanion();
+  const trainMutation = useTrainCompanion();
+
+  const handleActionClick = (action: 'feed' | 'play' | 'clean' | 'sleep' | 'train') => {
+    let videoUrl = '';
+    const actions = companion.species.assets.actions;
+
+    switch (action) {
+      case 'feed':
+        videoUrl = actions.feed;
+        feedMutation.mutate({ companionId: companion.id });
+        break;
+      case 'play':
+        videoUrl = actions.play;
+        playMutation.mutate({ companionId: companion.id });
+        break;
+      case 'clean':
+        videoUrl = actions.clean;
+        cleanMutation.mutate({ companionId: companion.id });
+        break;
+      case 'sleep':
+        videoUrl = actions.sleep;
+        sleepMutation.mutate({ companionId: companion.id });
+        break;
+      case 'train':
+        videoUrl = actions.train[companion.equippedWeapon?.itemId || ''];
+        trainMutation.mutate({ companionId: companion.id });
+        break;
+    }
+    if (videoUrl) onActionStart(videoUrl);
   };
 
   // Determinem les icones correctes basant-nos en l'univers del companion
