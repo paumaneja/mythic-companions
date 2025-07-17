@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -42,7 +42,7 @@ public class MinigameService {
                 .map(entry -> {
                     if (scoreRequest.score() > entry.getScore()) {
                         entry.setScore(scoreRequest.score());
-                        entry.setLastUpdated(LocalDateTime.now());
+                        entry.setLastUpdated(ZonedDateTime.now());
                         return true;
                     }
                     return false;
@@ -52,7 +52,7 @@ public class MinigameService {
                     newEntry.setUser(user);
                     newEntry.setGameId(scoreRequest.gameId());
                     newEntry.setScore(scoreRequest.score());
-                    newEntry.setLastUpdated(LocalDateTime.now());
+                    newEntry.setLastUpdated(ZonedDateTime.now());
                     rankingRepository.save(newEntry);
                     return true;
                 });

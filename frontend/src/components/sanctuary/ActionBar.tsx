@@ -1,14 +1,14 @@
+import type { SanctuaryDto, UiTheme } from '../../types';
 import { useQuery } from '@tanstack/react-query';
 import apiClient from '../../lib/apiClient';
-import type { SanctuaryDto, UiTheme } from '../../types';
 import { useFeedCompanion, usePlayWithCompanion, useCleanCompanion, useSleepCompanion, useTrainCompanion } from '../../hooks/useCompanionActions';
+import ActionButton from './ActionButton'; // Import the new component
 
 interface Props {
   companion: SanctuaryDto;
   onActionStart: (actionVideoUrl: string) => void;
 }
 
-// Funció per obtenir les dades de les icones
 const fetchUiThemes = async (): Promise<Record<string, UiTheme>> => {
   const { data } = await apiClient.get('/game-data/ui-themes');
   return data;
@@ -16,6 +16,7 @@ const fetchUiThemes = async (): Promise<Record<string, UiTheme>> => {
 
 export default function ActionBar({ companion, onActionStart }: Props) {
   const { data: uiThemes } = useQuery({ queryKey: ['uiThemes'], queryFn: fetchUiThemes });
+  const icons = uiThemes?.[companion.universeId]?.action_icons;
 
   const feedMutation = useFeedCompanion();
   const playMutation = usePlayWithCompanion();
@@ -24,55 +25,33 @@ export default function ActionBar({ companion, onActionStart }: Props) {
   const trainMutation = useTrainCompanion();
 
   const handleActionClick = (action: 'feed' | 'play' | 'clean' | 'sleep' | 'train') => {
-    let videoUrl = '';
     const actions = companion.species.assets.actions;
+    let videoUrl = '';
+    let mutation;
 
     switch (action) {
-      case 'feed':
-        videoUrl = actions.feed;
-        feedMutation.mutate({ companionId: companion.id });
-        break;
-      case 'play':
-        videoUrl = actions.play;
-        playMutation.mutate({ companionId: companion.id });
-        break;
-      case 'clean':
-        videoUrl = actions.clean;
-        cleanMutation.mutate({ companionId: companion.id });
-        break;
-      case 'sleep':
-        videoUrl = actions.sleep;
-        sleepMutation.mutate({ companionId: companion.id });
-        break;
-      case 'train':
-        videoUrl = actions.train[companion.equippedWeapon?.itemId || ''];
-        trainMutation.mutate({ companionId: companion.id });
-        break;
+      case 'feed': videoUrl = actions.feed; mutation = feedMutation; break;
+      case 'play': videoUrl = actions.play; mutation = playMutation; break;
+      case 'clean': videoUrl = actions.clean; mutation = cleanMutation; break;
+      case 'sleep': videoUrl = actions.sleep; mutation = sleepMutation; break;
+      case 'train': videoUrl = actions.train[companion.equippedWeapon?.itemId || '']; mutation = trainMutation; break;
     }
-    if (videoUrl) onActionStart(videoUrl);
-  };
 
-  // Determinem les icones correctes basant-nos en l'univers del companion
-  const icons = uiThemes?.[companion.universeId]?.action_icons;
+    if (!videoUrl || mutation.isPending) return;
+
+    mutation.mutate({ companionId: companion.id }, {
+      onSuccess: () => onActionStart(videoUrl)
+    });
+  };
 
   return (
     <div className="mt-6 rounded-lg bg-white/70 p-4 shadow-lg backdrop-blur-md">
         <div className="grid grid-cols-5 gap-4">
-            <button onClick={() => handleActionClick('feed')} className="p-2 aspect-square flex items-center justify-center rounded-md bg-gray-600/50 hover:bg-gray-700/70">
-                {icons && <img src={'/src' + icons.feed} alt="Feed" className="h-10 w-10"/>}
-            </button>
-            <button onClick={() => handleActionClick('play')} className="p-2 aspect-square flex items-center justify-center rounded-md bg-gray-600/50 hover:bg-gray-700/70">
-                {icons && <img src={'/src' + icons.play} alt="Play" className="h-10 w-10"/>}
-            </button>
-            <button onClick={() => handleActionClick('clean')} className="p-2 aspect-square flex items-center justify-center rounded-md bg-gray-600/50 hover:bg-gray-700/70">
-                {icons && <img src={'/src' + icons.clean} alt="Clean" className="h-10 w-10"/>}
-            </button>
-            <button onClick={() => handleActionClick('sleep')} className="p-2 aspect-square flex items-center justify-center rounded-md bg-gray-600/50 hover:bg-gray-700/70">
-                {icons && <img src={'/src' + icons.sleep} alt="Sleep" className="h-10 w-10"/>}
-            </button>
-            <button onClick={() => handleActionClick('train')} className="p-2 aspect-square flex items-center justify-center rounded-md bg-gray-600/50 hover:bg-gray-700/70">
-                {icons && <img src={'/src' + icons.train} alt="Train" className="h-10 w-10"/>}
-            </button>
+            <ActionButton label="Feed" iconUrl={'/src' + icons?.feed} cooldownTimestamp={companion.cooldowns.feed} onClick={() => handleActionClick('feed')} isMutating={feedMutation.isPending} />
+            <ActionButton label="Play" iconUrl={'/src' + icons?.play} cooldownTimestamp={companion.cooldowns.play} onClick={() => handleActionClick('play')} isMutating={playMutation.isPending} />
+            <ActionButton label="Clean" iconUrl={'/src' + icons?.clean} cooldownTimestamp={companion.cooldowns.clean} onClick={() => handleActionClick('clean')} isMutating={cleanMutation.isPending} />
+            <ActionButton label="Sleep" iconUrl={'/src' + icons?.sleep} cooldownTimestamp={companion.cooldowns.sleep} onClick={() => handleActionClick('sleep')} isMutating={sleepMutation.isPending} />
+            <ActionButton label="Train" iconUrl={'/src' + icons?.train} cooldownTimestamp={companion.cooldowns.train} onClick={() => handleActionClick('train')} isMutating={trainMutation.isPending} />
         </div>
     </div>
   );

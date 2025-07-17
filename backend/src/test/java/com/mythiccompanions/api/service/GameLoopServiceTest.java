@@ -11,7 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -47,7 +47,7 @@ class GameLoopServiceTest {
         Companion companion = new Companion();
         companion.setStatus(Status.ACTIVE);
         companion.setHunger(20);
-        companion.setLastStatsUpdateTimestamp(LocalDateTime.now().minusHours(5));
+        companion.setLastStatsUpdateTimestamp(ZonedDateTime.now().minusHours(5));
 
         gameLoopService.applyPassiveEffects(companion);
 
@@ -62,7 +62,7 @@ class GameLoopServiceTest {
         Companion companion = new Companion();
         companion.setStatus(Status.SICK);
         companion.setHealth(50);
-        companion.setLastStatsUpdateTimestamp(LocalDateTime.now().minusHours(6));
+        companion.setLastStatsUpdateTimestamp(ZonedDateTime.now().minusHours(6));
 
         gameLoopService.applyPassiveEffects(companion);
 
@@ -76,7 +76,7 @@ class GameLoopServiceTest {
         companion.setStatus(Status.ACTIVE);
         companion.setHunger(100);
         // Simulate only 30 minutes have passed (0 full hours)
-        companion.setLastStatsUpdateTimestamp(LocalDateTime.now().minusMinutes(30));
+        companion.setLastStatsUpdateTimestamp(ZonedDateTime.now().minusMinutes(30));
 
         gameLoopService.applyPassiveEffects(companion);
 

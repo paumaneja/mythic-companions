@@ -11,7 +11,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Service
@@ -32,7 +32,7 @@ public class ProgressionService {
         if (companion.getEquippedWeaponId() == null) {
             throw new ActionUnavailableException("Cannot train: No weapon equipped.");
         }
-        if (companion.getNextTrainTimestamp() != null && LocalDateTime.now().isBefore(companion.getNextTrainTimestamp())) {
+        if (companion.getNextTrainTimestamp() != null && ZonedDateTime.now().isBefore(companion.getNextTrainTimestamp())) {
             throw new ActionUnavailableException("Action 'Train' is on cooldown.");
         }
 
@@ -46,8 +46,8 @@ public class ProgressionService {
         companion.setHygiene(companion.getHygiene() - rules.getHygieneCostTrain());
 
         long cooldownHours = gameDataService.getActionDefinition("TRAIN").getCooldownHours();
-        companion.setNextTrainTimestamp(LocalDateTime.now().plusHours(cooldownHours));
-        companion.setLastStatsUpdateTimestamp(LocalDateTime.now());
+        companion.setNextTrainTimestamp(ZonedDateTime.now().plusHours(cooldownHours));
+        companion.setLastStatsUpdateTimestamp(ZonedDateTime.now());
 
         return companionRepository.save(companion);
     }

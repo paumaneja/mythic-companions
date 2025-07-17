@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -23,12 +23,12 @@ public class GameLoopService {
      */
     public void applyPassiveEffects(Companion companion) {
         if (companion.getLastStatsUpdateTimestamp() == null) {
-            companion.setLastStatsUpdateTimestamp(LocalDateTime.now());
+            companion.setLastStatsUpdateTimestamp(ZonedDateTime.now());
             return;
         }
 
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime lastUpdate = companion.getLastStatsUpdateTimestamp();
+        ZonedDateTime now = ZonedDateTime.now();
+        ZonedDateTime lastUpdate = companion.getLastStatsUpdateTimestamp();
         long totalHoursToSimulate = Duration.between(lastUpdate, now).toHours();
 
         if (totalHoursToSimulate <= 0) {

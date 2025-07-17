@@ -16,7 +16,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.IntUnaryOperator;
@@ -84,7 +84,7 @@ public class CompanionService {
         if (companion.getStatus() != Status.ACTIVE) {
             throw new ActionUnavailableException("Action 'Feed' is unavailable. Companion status is " + companion.getStatus());
         }
-        if (companion.getNextFeedTimestamp() != null && LocalDateTime.now().isBefore(companion.getNextFeedTimestamp())) {
+        if (companion.getNextFeedTimestamp() != null && ZonedDateTime.now().isBefore(companion.getNextFeedTimestamp())) {
             throw new ActionUnavailableException("Action 'Feed' is on cooldown.");
         }
 
@@ -98,8 +98,8 @@ public class CompanionService {
         companion.setHygiene(clamp.applyAsInt(companion.getHygiene() + effects.getHygiene()));
         companion.setEnergy(clamp.applyAsInt(companion.getEnergy() + effects.getEnergy()));
 
-        companion.setNextFeedTimestamp(LocalDateTime.now().plusHours(feedAction.getCooldownHours()));
-        companion.setLastStatsUpdateTimestamp(LocalDateTime.now());
+        companion.setNextFeedTimestamp(ZonedDateTime.now().plusHours(feedAction.getCooldownHours()));
+        companion.setLastStatsUpdateTimestamp(ZonedDateTime.now());
 
         return companionRepository.save(companion);
     }
@@ -111,7 +111,7 @@ public class CompanionService {
         if (companion.getStatus() != Status.ACTIVE) {
             throw new ActionUnavailableException("Action 'Play' is unavailable. Companion status is " + companion.getStatus());
         }
-        if (companion.getNextPlayTimestamp() != null && LocalDateTime.now().isBefore(companion.getNextPlayTimestamp())) {
+        if (companion.getNextPlayTimestamp() != null && ZonedDateTime.now().isBefore(companion.getNextPlayTimestamp())) {
             throw new ActionUnavailableException("Action 'Play' is on cooldown.");
         }
 
@@ -124,8 +124,8 @@ public class CompanionService {
         companion.setHunger(clamp.applyAsInt(companion.getHunger() + effects.getHunger()));
         companion.setEnergy(clamp.applyAsInt(companion.getEnergy() + effects.getEnergy()));
 
-        companion.setNextPlayTimestamp(LocalDateTime.now().plusHours(playAction.getCooldownHours()));
-        companion.setLastStatsUpdateTimestamp(LocalDateTime.now());
+        companion.setNextPlayTimestamp(ZonedDateTime.now().plusHours(playAction.getCooldownHours()));
+        companion.setLastStatsUpdateTimestamp(ZonedDateTime.now());
 
         return companionRepository.save(companion);
     }
@@ -137,7 +137,7 @@ public class CompanionService {
         if (companion.getStatus() != Status.ACTIVE) {
             throw new ActionUnavailableException("Action 'Clean' is unavailable. Companion status is " + companion.getStatus());
         }
-        if (companion.getNextCleanTimestamp() != null && LocalDateTime.now().isBefore(companion.getNextCleanTimestamp())) {
+        if (companion.getNextCleanTimestamp() != null && ZonedDateTime.now().isBefore(companion.getNextCleanTimestamp())) {
             throw new ActionUnavailableException("Action 'Clean' is on cooldown.");
         }
 
@@ -149,8 +149,8 @@ public class CompanionService {
         companion.setHappiness(clamp.applyAsInt(companion.getHappiness() + effects.getHappiness()));
         companion.setEnergy(clamp.applyAsInt(companion.getEnergy() + effects.getEnergy()));
 
-        companion.setNextCleanTimestamp(LocalDateTime.now().plusHours(cleanAction.getCooldownHours()));
-        companion.setLastStatsUpdateTimestamp(LocalDateTime.now());
+        companion.setNextCleanTimestamp(ZonedDateTime.now().plusHours(cleanAction.getCooldownHours()));
+        companion.setLastStatsUpdateTimestamp(ZonedDateTime.now());
 
         return companionRepository.save(companion);
     }
@@ -162,7 +162,7 @@ public class CompanionService {
         if (companion.getStatus() != Status.ACTIVE) {
             throw new ActionUnavailableException("Action 'Sleep' is unavailable. Companion status is " + companion.getStatus());
         }
-        if (companion.getNextSleepTimestamp() != null && LocalDateTime.now().isBefore(companion.getNextSleepTimestamp())) {
+        if (companion.getNextSleepTimestamp() != null && ZonedDateTime.now().isBefore(companion.getNextSleepTimestamp())) {
             throw new ActionUnavailableException("Action 'Sleep' is on cooldown.");
         }
 
@@ -170,8 +170,8 @@ public class CompanionService {
 
         companion.setEnergy(100);
 
-        companion.setNextSleepTimestamp(LocalDateTime.now().plusHours(sleepAction.getCooldownHours()));
-        companion.setLastStatsUpdateTimestamp(LocalDateTime.now());
+        companion.setNextSleepTimestamp(ZonedDateTime.now().plusHours(sleepAction.getCooldownHours()));
+        companion.setLastStatsUpdateTimestamp(ZonedDateTime.now());
 
         return companionRepository.save(companion);
     }

@@ -1,11 +1,11 @@
 package com.mythiccompanions.api.dto;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public record CooldownsDto(
-        LocalDateTime feed,
-        LocalDateTime play,
-        LocalDateTime clean,
-        LocalDateTime sleep,
-        LocalDateTime train
+        ZonedDateTime feed,
+        ZonedDateTime play,
+        ZonedDateTime clean,
+        ZonedDateTime sleep,
+        ZonedDateTime train
 ) {}

@@ -3,7 +3,7 @@ package com.mythiccompanions.api.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "ranking_entries",
@@ -28,5 +28,5 @@ public class RankingEntry {
     private int score;
 
     @Column(nullable = false)
-    private LocalDateTime lastUpdated;
+    private ZonedDateTime lastUpdated;
 }

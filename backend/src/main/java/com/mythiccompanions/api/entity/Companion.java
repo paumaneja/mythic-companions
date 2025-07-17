@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "companions", indexes = {
@@ -37,13 +37,13 @@ public class Companion {
 
     private int experiencePoints = 0;
 
-    private LocalDateTime nextFeedTimestamp;
-    private LocalDateTime nextPlayTimestamp;
-    private LocalDateTime nextCleanTimestamp;
-    private LocalDateTime nextSleepTimestamp;
-    private LocalDateTime nextTrainTimestamp;
+    private ZonedDateTime nextFeedTimestamp;
+    private ZonedDateTime nextPlayTimestamp;
+    private ZonedDateTime nextCleanTimestamp;
+    private ZonedDateTime nextSleepTimestamp;
+    private ZonedDateTime nextTrainTimestamp;
 
-    private LocalDateTime lastStatsUpdateTimestamp;
+    private ZonedDateTime lastStatsUpdateTimestamp;
 
     private String equippedWeaponId;
 
