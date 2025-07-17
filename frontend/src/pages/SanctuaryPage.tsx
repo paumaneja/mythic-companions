@@ -2,19 +2,9 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import apiClient from '../lib/apiClient';
 import { useAuthStore } from '../stores/authStore';
-import type { SanctuaryDto, StatsDto, ProgressionDto, EquippedWeaponDto } from '../types';
+import type { SanctuaryDto, ProgressionDto, EquippedWeaponDto } from '../types';
+import StatsPanel from '../components/sanctuary/StatsPanel';
 
-// Placeholder Components - We will create these later
-const StatsPanel = ({ stats }: { stats: StatsDto }) => (
-    <div className="bg-white p-4 rounded-lg shadow">
-        <h2 className="text-xl font-bold mb-2">Stats</h2>
-        <p>Health: {stats.health}/100</p>
-        <p>Energy: {stats.energy}/100</p>
-        <p>Hunger: {stats.hunger}/100</p>
-        <p>Happiness: {stats.happiness}/100</p>
-        <p>Hygiene: {stats.hygiene}/100</p>
-    </div>
-);
 
 const ProgressionPanel = ({ progression }: { progression: ProgressionDto }) => (
     <div className="bg-white p-4 rounded-lg shadow">
