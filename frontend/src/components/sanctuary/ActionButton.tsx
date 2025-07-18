@@ -16,13 +16,13 @@ export default function ActionButton({ label, iconUrl, cooldownTimestamp, onClic
     <button
       onClick={onClick}
       disabled={isDisabled}
-      className="p-2 aspect-square flex flex-col items-center justify-center rounded-md bg-gray-600/50 hover:bg-gray-700/70 transition-colors disabled:bg-gray-500/50 disabled:cursor-not-allowed"
+      className="aspect-square flex flex-col items-center justify-center rounded-md bg-gray-600/50 hover:bg-gray-700/70 transition-colors disabled:bg-gray-500/50 disabled:cursor-not-allowed"
       title={label}
     >
       {isOnCooldown ? (
         <span className="text-white font-mono text-sm">{timeLeftFormatted}</span>
       ) : (
-        iconUrl && <img src={iconUrl} alt={label} className="h-10 w-10" />
+        iconUrl && <img src={iconUrl} alt={label} className="w-full h-full rounded-md object-contain" />
       )}
     </button>
   );

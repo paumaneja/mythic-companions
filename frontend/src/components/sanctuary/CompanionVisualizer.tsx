@@ -14,20 +14,20 @@ export default function CompanionVisualizer({ companion, playingVideoUrl, onVide
     : companion.species.assets.static_unequipped;
 
   return (
-    <div className="relative flex h-full min-h-[400px] items-center justify-center rounded-lg bg-white/70 p-4 shadow-lg backdrop-blur-md">
+    <div className="relative flex items-center justify-center rounded-lg bg-black/20 shadow-lg backdrop-blur-sm overflow-hidden aspect-video">
       {playingVideoUrl ? (
         <video
           key={playingVideoUrl}
           src={playingVideoUrl}
           autoPlay
           onEnded={onVideoEnd}
-          className="max-w-full max-h-96"
+          className="absolute top-0 left-0 w-full h-full object-cover"
         />
       ) : (
       <img 
         src={imageUrl} 
         alt={companion.name} 
-        className="max-h-96 max-w-full"
+        className="w-full h-full object-cover"
       />
       )}
 
@@ -40,7 +40,7 @@ export default function CompanionVisualizer({ companion, playingVideoUrl, onVide
           <span className="text-3xl font-bold text-white">HOSPITALIZED</span>
         </div>
       )}
-      <div className="absolute bottom-0 left-0 right-0">
+      <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-3/5">
         <ActionBar companion={companion} onActionStart={onActionStart} />
       </div>
     </div>

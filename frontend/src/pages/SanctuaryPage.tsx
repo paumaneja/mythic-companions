@@ -60,28 +60,36 @@ export default function SanctuaryPage() {
 
   return (
     <div
-      className="p-6 min-h-full bg-cover bg-center"
+      className="p-4 sm:p-6 min-h-full bg-cover bg-center"
       style={{ backgroundImage: `url(${backgroundUrl})` }}
-    >  
-      <h1 className="text-4xl font-bold text-center mb-8">{companion.name}</h1>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column */}
-        <div className="lg:col-span-1 space-y-6">
-          <StatsPanel stats={companion.stats} />
-          <ProgressionPanel progression={companion.progression} />
-          <WeaponPanel weapon={companion.equippedWeapon} companionId={companion.id} />
-        </div>
+    >
+      <div className="container mx-auto">  
+        <h1 className="text-4xl font-bold text-center mb-8 text-white drop-shadow-lg">{companion.name}</h1>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          {/* Left Column */}
+          <div className="lg:col-span-2 justify-between flex flex-col">
+            <StatsPanel stats={companion.stats} />
+            
+            <WeaponPanel weapon={companion.equippedWeapon} companionId={companion.id} />
+          </div>
 
-        {/* Right Column (Wider) */}
-        <div className="lg:col-span-2">
-          <CompanionVisualizer 
-            companion={companion} 
-            playingVideoUrl={playingVideoUrl}
-            onVideoEnd={() => setPlayingVideoUrl(null)}
-            onActionStart={handleActionStart}
-          />
+          {/* Right Column (Wider) */}
+          <div className="lg:col-span-8">
+            <CompanionVisualizer 
+              companion={companion} 
+              playingVideoUrl={playingVideoUrl}
+              onVideoEnd={() => setPlayingVideoUrl(null)}
+              onActionStart={handleActionStart}
+            />
+          </div>
+
+          <div className="lg:col-span-2 flex flex-col">
+            <div className="flex-1">
+            <ProgressionPanel progression={companion.progression} />
+            </div>
+          </div>
         </div>
-      </div>
+      </div>  
     </div>
   );
 }

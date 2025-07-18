@@ -45,8 +45,8 @@ export default function ActionBar({ companion, onActionStart }: Props) {
   };
 
   return (
-    <div className="mt-6 rounded-lg bg-white/70 p-4 shadow-lg backdrop-blur-md">
-        <div className="grid grid-cols-5 gap-4">
+    <div className="p-10">
+        <div className="grid grid-cols-5 gap-8">
             <ActionButton label="Feed" iconUrl={icons?.feed} cooldownTimestamp={companion.cooldowns.feed} onClick={() => handleActionClick('feed')} isMutating={feedMutation.isPending} />
             <ActionButton label="Play" iconUrl={icons?.play} cooldownTimestamp={companion.cooldowns.play} onClick={() => handleActionClick('play')} isMutating={playMutation.isPending} />
             <ActionButton label="Clean" iconUrl={icons?.clean} cooldownTimestamp={companion.cooldowns.clean} onClick={() => handleActionClick('clean')} isMutating={cleanMutation.isPending} />
