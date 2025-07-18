@@ -26,10 +26,10 @@ export default function SchoolPage() {
   const existingSpeciesIds = companions ? companions.map(c => c.speciesId) : [];
 
   return (
-    <div className="p-6 bg-cover bg-center min-h-full" style={{ backgroundImage: `url(${SchoolBackgroundImage})` }}>
-      <div className="container mx-auto p-8">
-        <h1 className="text-center text-3xl font-bold mb-6 p-6 text-gray-800">Your Companions</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
+    <div className="bg-cover bg-center min-h-full" style={{ backgroundImage: `url(${SchoolBackgroundImage})` }}>
+      <div className="container mx-auto p-4">
+        <h1 className="font-bitcount text-center text-3xl p-2 text-white">Your Companions</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center p-2">
           {companions?.map((companion) => (
             <CompanionCard key={companion.id} companion={companion} />
           ))}

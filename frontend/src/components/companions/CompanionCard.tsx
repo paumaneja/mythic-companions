@@ -16,15 +16,15 @@ const StatusIndicator = ({ status }: { status: string }) => {
 
 export default function CompanionCard({ companion }: CompanionCardProps) {
   return (
-    <Link to={`/sanctuary/${companion.id}`} className="block p-4 bg-gray-800/50 rounded-lg shadow-lg hover:bg-gray-700/70 transition-colors duration-300">
+    <Link to={`/sanctuary/${companion.id}`} className="block p-4 bg-gray-800/80 rounded-lg shadow-lg hover:bg-gray-700/70 transition-colors duration-300">
       <div className="flex flex-col items-center">
-        <div className="w-full aspect-video bg-gray-900 mb-4 flex items-center justify-center overflow-hidden">
-          <img src={companion.imageUrl} alt={companion.name} className="w-full object-cover" />
+        <div className="w-full aspect-video bg-gray-900 mb-4 rounded-lg flex items-center justify-center overflow-hidden">
+          <img src={companion.imageUrl} alt={companion.name} className="w-full rounded-lg object-cover" />
           <StatusIndicator status={companion.status} />
         </div>
-        <div className="p-4">
-          <h3 className="text-xl font-bold text-gray-900">{companion.name}</h3>
-          <p className="text-md text-gray-600 capitalize">{companion.speciesId.toLowerCase().replace('_', ' ')}</p>
+        <div className="w-full rounded-lg bg-gray-800/80 p-1">
+          <h3 className="font-bitcount text-center text-2xl text-white">{companion.name}</h3>
+          <p className="font-bitcount text-center text-sm text-white capitalize">{companion.speciesId.toLowerCase().replace('_', ' ')}</p>
         </div>
       </div>  
     </Link>

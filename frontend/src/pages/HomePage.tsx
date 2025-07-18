@@ -1,1 +1,1 @@
-export default function HomePage() { return <h1 className="text-3xl">Welcome to MythicCompanions!</h1>; }
+export default function HomePage() { return <h1 className="font-bitcount text-3xl">Welcome to MythicCompanions!</h1>; }
