@@ -8,7 +8,6 @@ import StatsPanel from '../components/sanctuary/StatsPanel';
 import ProgressionPanel from '../components/sanctuary/ProgressionPanel';
 import WeaponPanel from '../components/sanctuary/WeaponPanel';
 import CompanionVisualizer from '../components/sanctuary/CompanionVisualizer';
-import ActionBar from '../components/sanctuary/ActionBar';
 
 
 const fetchCompanionDetails = async (id: string, token: string | null): Promise<SanctuaryDto> => {
@@ -30,12 +29,40 @@ export default function SanctuaryPage() {
     enabled: !!id && !!token,
   });
 
+  const handleActionStart = (actionName: string) => {
+    if (!companion) return;
+
+    let videoUrl: string | undefined = undefined;
+    const actions = companion.species.assets.actions;
+
+    if (actionName === 'train') {
+      const weaponId = companion.equippedWeapon?.itemId;
+      if (weaponId && actions.train) {
+        videoUrl = actions.train[weaponId];
+      }
+    } else {
+      // Access other actions safely
+      videoUrl = actions[actionName as keyof Omit<typeof actions, 'train'>];
+    }
+  
+    if (videoUrl) {
+      setPlayingVideoUrl(videoUrl);
+    } else {
+        console.warn(`No video URL found for action '${actionName}'`);
+    }
+  };
+
   if (isLoading) return <div>Loading Sanctuary...</div>;
   if (isError) return <div>Error loading companion data.</div>;
   if (!companion) return <div>Companion not found.</div>;
 
+  const backgroundUrl = `/src/assets/images/universes/${companion.universeId}.jpg`;
+
   return (
-    <div className="p-4" style={{ /* TODO: Add dynamic background here */ }}>
+    <div
+      className="p-6 min-h-full bg-cover bg-center"
+      style={{ backgroundImage: `url(${backgroundUrl})` }}
+    >  
       <h1 className="text-4xl font-bold text-center mb-8">{companion.name}</h1>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Column */}
@@ -51,10 +78,7 @@ export default function SanctuaryPage() {
             companion={companion} 
             playingVideoUrl={playingVideoUrl}
             onVideoEnd={() => setPlayingVideoUrl(null)}
-          />
-          <ActionBar 
-            companion={companion} 
-            onActionStart={(videoUrl) => setPlayingVideoUrl(videoUrl)}
+            onActionStart={handleActionStart}
           />
         </div>
       </div>

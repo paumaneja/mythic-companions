@@ -10,8 +10,8 @@ export default function ProgressionPanel({ progression }: ProgressionPanelProps)
   const xpNeededForNextLevel = progression.xpForNextLevel - xpForCurrentLevel;
 
   return (
-    <div className="bg-white/70 backdrop-blur-md p-6 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Progression</h2>
+    <div className="bg-gray-900/50 backdrop-blur-md p-6 rounded-lg shadow-lg text-white">
+      <h2 className="text-2xl font-bold mb-4 border-b border-white/20 pb-2">Progression</h2>
       <div className="space-y-4">
         <div className="text-center">
           <p className="text-lg text-gray-600">Level</p>

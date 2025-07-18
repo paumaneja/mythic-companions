@@ -40,18 +40,18 @@ export default function ActionBar({ companion, onActionStart }: Props) {
     if (!videoUrl || mutation.isPending) return;
 
     mutation.mutate({ companionId: companion.id }, {
-      onSuccess: () => onActionStart(videoUrl)
+      onSuccess: () => onActionStart(action)
     });
   };
 
   return (
     <div className="mt-6 rounded-lg bg-white/70 p-4 shadow-lg backdrop-blur-md">
         <div className="grid grid-cols-5 gap-4">
-            <ActionButton label="Feed" iconUrl={'/src' + icons?.feed} cooldownTimestamp={companion.cooldowns.feed} onClick={() => handleActionClick('feed')} isMutating={feedMutation.isPending} />
-            <ActionButton label="Play" iconUrl={'/src' + icons?.play} cooldownTimestamp={companion.cooldowns.play} onClick={() => handleActionClick('play')} isMutating={playMutation.isPending} />
-            <ActionButton label="Clean" iconUrl={'/src' + icons?.clean} cooldownTimestamp={companion.cooldowns.clean} onClick={() => handleActionClick('clean')} isMutating={cleanMutation.isPending} />
-            <ActionButton label="Sleep" iconUrl={'/src' + icons?.sleep} cooldownTimestamp={companion.cooldowns.sleep} onClick={() => handleActionClick('sleep')} isMutating={sleepMutation.isPending} />
-            <ActionButton label="Train" iconUrl={'/src' + icons?.train} cooldownTimestamp={companion.cooldowns.train} onClick={() => handleActionClick('train')} isMutating={trainMutation.isPending} />
+            <ActionButton label="Feed" iconUrl={icons?.feed} cooldownTimestamp={companion.cooldowns.feed} onClick={() => handleActionClick('feed')} isMutating={feedMutation.isPending} />
+            <ActionButton label="Play" iconUrl={icons?.play} cooldownTimestamp={companion.cooldowns.play} onClick={() => handleActionClick('play')} isMutating={playMutation.isPending} />
+            <ActionButton label="Clean" iconUrl={icons?.clean} cooldownTimestamp={companion.cooldowns.clean} onClick={() => handleActionClick('clean')} isMutating={cleanMutation.isPending} />
+            <ActionButton label="Sleep" iconUrl={icons?.sleep} cooldownTimestamp={companion.cooldowns.sleep} onClick={() => handleActionClick('sleep')} isMutating={sleepMutation.isPending} />
+            <ActionButton label="Train" iconUrl={icons?.train} cooldownTimestamp={companion.cooldowns.train} onClick={() => handleActionClick('train')} isMutating={trainMutation.isPending} />
         </div>
     </div>
   );

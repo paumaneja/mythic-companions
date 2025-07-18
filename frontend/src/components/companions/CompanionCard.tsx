@@ -19,7 +19,7 @@ export default function CompanionCard({ companion }: CompanionCardProps) {
     <Link to={`/sanctuary/${companion.id}`} className="block p-4 bg-gray-800/50 rounded-lg shadow-lg hover:bg-gray-700/70 transition-colors duration-300">
       <div className="flex flex-col items-center">
         <div className="w-full aspect-video bg-gray-900 mb-4 flex items-center justify-center overflow-hidden">
-          <img src={'src' + companion.imageUrl} alt={companion.name} className="w-full object-cover" />
+          <img src={companion.imageUrl} alt={companion.name} className="w-full object-cover" />
           <StatusIndicator status={companion.status} />
         </div>
         <div className="p-4">

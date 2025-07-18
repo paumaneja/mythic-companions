@@ -15,8 +15,8 @@ export default function WeaponPanel({ weapon, companionId }: WeaponPanelProps) {
   };
 
   return (
-    <div className="bg-white/70 backdrop-blur-md p-6 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Weapon</h2>
+    <div className="bg-gray-900/50 backdrop-blur-md p-6 rounded-lg shadow-lg text-white">
+      <h2 className="text-2xl font-bold mb-4 border-b border-white/20 pb-2">Weapon</h2>
       {weapon ? (
         <div>
           <div className='flex items-center space-x-4'>

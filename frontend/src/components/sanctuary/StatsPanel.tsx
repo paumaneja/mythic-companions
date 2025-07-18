@@ -7,8 +7,8 @@ interface StatsPanelProps {
 
 export default function StatsPanel({ stats }: StatsPanelProps) {
   return (
-    <div className="bg-white/70 backdrop-blur-md p-6 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Stats</h2>
+    <div className="bg-gray-900/50 backdrop-blur-md p-6 rounded-lg shadow-lg text-white">
+      <h2 className="text-2xl font-bold mb-4 border-b border-white/20 pb-2">Stats</h2>
       <div className="space-y-4">
         <StatBar label="Health" value={stats.health} colorClass="bg-red-500" />
         <StatBar label="Energy" value={stats.energy} colorClass="bg-blue-500" />

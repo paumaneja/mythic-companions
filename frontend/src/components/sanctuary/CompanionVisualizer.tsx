@@ -1,12 +1,14 @@
 import type { SanctuaryDto } from '../../types';
+import ActionBar from './ActionBar';
 
 interface Props {
   companion: SanctuaryDto;
   playingVideoUrl: string | null;
   onVideoEnd: () => void;
+  onActionStart: (action: string) => void;
 }
 
-export default function CompanionVisualizer({ companion, playingVideoUrl, onVideoEnd }: Props) {
+export default function CompanionVisualizer({ companion, playingVideoUrl, onVideoEnd, onActionStart }: Props) {
   const imageUrl = companion.equippedWeapon
     ? companion.species.assets.static_equipped[companion.equippedWeapon.itemId]
     : companion.species.assets.static_unequipped;
@@ -16,14 +18,14 @@ export default function CompanionVisualizer({ companion, playingVideoUrl, onVide
       {playingVideoUrl ? (
         <video
           key={playingVideoUrl}
-          src={'/src' + playingVideoUrl}
+          src={playingVideoUrl}
           autoPlay
           onEnded={onVideoEnd}
           className="max-w-full max-h-96"
         />
       ) : (
       <img 
-        src={'/src' + imageUrl} 
+        src={imageUrl} 
         alt={companion.name} 
         className="max-h-96 max-w-full"
       />
@@ -38,6 +40,9 @@ export default function CompanionVisualizer({ companion, playingVideoUrl, onVide
           <span className="text-3xl font-bold text-white">HOSPITALIZED</span>
         </div>
       )}
+      <div className="absolute bottom-0 left-0 right-0">
+        <ActionBar companion={companion} onActionStart={onActionStart} />
+      </div>
     </div>
   );
 }
