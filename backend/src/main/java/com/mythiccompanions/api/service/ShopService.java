@@ -29,7 +29,7 @@ public class ShopService {
     }
 
     @Transactional
-    public void buyItem(String username, String itemId, int quantity) {
+    public User buyItem(String username, String itemId, int quantity) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found: " + username));
 
@@ -46,8 +46,10 @@ public class ShopService {
         }
 
         user.setMythicCoins(user.getMythicCoins() - totalCost);
-        userRepository.save(user);
+        User updatedUser = userRepository.save(user);
 
         inventoryService.giveItemToUser(username, itemId, quantity);
+
+        return updatedUser;
     }
 }

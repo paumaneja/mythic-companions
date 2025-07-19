@@ -1,6 +1,9 @@
 package com.mythiccompanions.api.controller;
 
 import com.mythiccompanions.api.dto.BuyItemRequestDto;
+import com.mythiccompanions.api.dto.UserDto;
+import com.mythiccompanions.api.entity.User;
+import com.mythiccompanions.api.mapper.UserMapper;
 import com.mythiccompanions.api.model.Item;
 import com.mythiccompanions.api.service.ShopService;
 import jakarta.validation.Valid;
@@ -11,7 +14,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/shop")
@@ -19,6 +21,7 @@ import java.util.Map;
 public class ShopController {
 
     private final ShopService shopService;
+    private final UserMapper userMapper;
 
     @GetMapping("/items")
     public ResponseEntity<List<Item>> getShopItems() {
@@ -27,13 +30,13 @@ public class ShopController {
     }
 
     @PostMapping("/buy/{itemId}")
-    public ResponseEntity<?> buyItem(
+    public ResponseEntity<UserDto> buyItem(
             @PathVariable String itemId,
             @AuthenticationPrincipal UserDetails userDetails,
             @Valid @RequestBody BuyItemRequestDto buyRequest) {
 
-        shopService.buyItem(userDetails.getUsername(), itemId, buyRequest.quantity());
+        User updpatedUser = shopService.buyItem(userDetails.getUsername(), itemId, buyRequest.quantity());
 
-        return ResponseEntity.ok(Map.of("message", "Purchase successful!"));
+        return ResponseEntity.ok(userMapper.toDto(updpatedUser));
     }
 }

@@ -92,3 +92,15 @@ export type ActionIcons = {
 export type UiTheme = {
   action_icons: ActionIcons;
 };
+
+export type Item = {
+  itemId: string;
+  name: string;
+  description: string;
+  type: 'CONSUMABLE' | 'WEAPON';
+  imageUrl: string;
+  rarity: 'COMMON' | 'UNCOMMON' | 'RARE' | 'EPIC';
+  forSale: boolean;
+  price: number;
+  // 'effect' and 'weaponType' are not needed by the shop/inventory card, so we can omit them for now.
+};
