@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import AuthLayout from './components/layout/AuthLayout';
 import PrivateLayout from './components/layout/PrivateLayout';
+import PublicLayout from './components/layout/PublicLayout';
 import ProtectedRoute from './components/ProtectedRoute';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -12,7 +13,9 @@ function App() {
   return (
     <Routes>
       {/* Public route for the landing page */}
-      <Route path="/" element={<HomePage />} />
+      <Route element={<PublicLayout />}>
+        <Route path="/" element={<HomePage />} />
+      </Route>
 
       {/* Public routes for authentication, using the AuthLayout */}
       <Route element={<AuthLayout />}>
