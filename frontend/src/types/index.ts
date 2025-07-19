@@ -30,6 +30,8 @@ export type Species = {
     speciesId: string;
     name: string;
     description: string;
+    universeId: string;
+    allowedWeaponTypes: string[];
 };
 
 export type AdoptionSpeciesDto = {
@@ -113,6 +115,7 @@ export type InventoryItemDto = {
   imageUrl: string;
   rarity: 'COMMON' | 'UNCOMMON' | 'RARE' | 'EPIC';
   quantity: number;
+  weaponType?: string;
 };
 
 export type DisplayableItem = {

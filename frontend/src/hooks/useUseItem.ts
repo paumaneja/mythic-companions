@@ -17,9 +17,7 @@ export const useUseItem = () => {
         headers: { Authorization: `Bearer ${token}` },
       }),
 
-    onSuccess: (data, variables) => {
-      console.log("Item used successfully");
-      // Refresca totes les dades que podrien haver canviat
+    onSuccess: (_data, variables) => {
       queryClient.invalidateQueries({ queryKey: ['inventory'] });
       queryClient.invalidateQueries({ queryKey: ['companion', String(variables.companionId)] });
     },

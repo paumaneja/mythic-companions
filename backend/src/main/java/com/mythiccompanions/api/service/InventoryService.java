@@ -5,6 +5,7 @@ import com.mythiccompanions.api.entity.Companion;
 import com.mythiccompanions.api.entity.User;
 import com.mythiccompanions.api.entity.UserInventory;
 import com.mythiccompanions.api.entity.UserInventoryId;
+import com.mythiccompanions.api.mapper.InventoryMapper;
 import com.mythiccompanions.api.exception.InvalidItemTargetException;
 import com.mythiccompanions.api.exception.ItemNotFoundException;
 import com.mythiccompanions.api.exception.ResourceNotFoundException;
@@ -31,32 +32,17 @@ public class InventoryService {
     private final GameDataService gameDataService;
     private final CompanionRepository companionRepository;
     private final GameLoopService gameLoopService;
+    private final InventoryMapper inventoryMapper;
 
     public List<InventoryItemDto> getUserInventory(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found: " + username));
 
-        List<UserInventory> inventoryEntries = inventoryRepository.findByUser(user);
-
-        return inventoryEntries.stream()
-                .map(this::convertToInventoryItemDto)
+        return inventoryRepository.findByUser(user).stream()
+                .map(inventoryMapper::toDto)
                 .collect(Collectors.toList());
     }
 
-    private InventoryItemDto convertToInventoryItemDto(UserInventory inventoryEntry) {
-        Item itemData = gameDataService.getItemById(inventoryEntry.getId().getItemId())
-                .orElseThrow(() -> new IllegalStateException("Invalid item ID in inventory: " + inventoryEntry.getId().getItemId()));
-
-        return new InventoryItemDto(
-                itemData.getItemId(),
-                itemData.getName(),
-                itemData.getDescription(),
-                itemData.getType(),
-                itemData.getImageUrl(),
-                itemData.getRarity(),
-                inventoryEntry.getQuantity()
-        );
-    }
 
     // --- Temporary method for testing ---
     @Transactional

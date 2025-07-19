@@ -9,6 +9,6 @@ public record InventoryItemDto(
         ItemType type,
         String imageUrl,
         String rarity,
-
+        String weaponType,
         int quantity
 ) {}

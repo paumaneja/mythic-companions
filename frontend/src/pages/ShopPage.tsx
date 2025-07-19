@@ -45,7 +45,7 @@ export default function ShopPage() {
   if (isError) return <div className="text-center p-10 text-red-500">Could not load shop items.</div>;
 
   return (
-    <div className="relative h-full w-full">
+    <div className="relative h-full w-full flex flex-col">
       <div 
         className="absolute inset-0 bg-cover bg-center bg-fixed" 
         style={{ backgroundImage: `url(${ShopBackgroundImage})` }}
@@ -53,8 +53,11 @@ export default function ShopPage() {
 
       <div className="absolute inset-0 bg-black/30"></div>
 
-      <div className="relative z-10 h-full overflow-y-auto p-6">
-        <h1 className="text-4xl font-bold text-center mb-8 text-white drop-shadow-lg">Item Shop</h1>
+      <div className="relative z-10 h-full flex flex-col">
+        <header className="p-6">
+          <h1 className="text-4xl font-bold text-center text-white drop-shadow-lg">Item Shop</h1>
+        </header>
+        <div className="flex-1 overflow-y-auto px-6 pb-6">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {items?.map((item) => (
@@ -70,6 +73,7 @@ export default function ShopPage() {
               </ItemCard>
             ))}
           </div>
+        </div>
         </div>
       </div>
     </div>
