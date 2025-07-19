@@ -45,30 +45,30 @@ export default function ShopPage() {
   if (isError) return <div className="text-center p-10 text-red-500">Could not load shop items.</div>;
 
   return (
-    // Contenidor principal que ocupa tota l'alçada disponible dins del PrivateLayout
     <div className="relative h-full w-full">
-      {/* Capa 1: La imatge de fons. Està fixada i ocupa tot l'espai. */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-fixed" 
         style={{ backgroundImage: `url(${ShopBackgroundImage})` }}
       ></div>
 
-      {/* Capa 2 (Opcional): Un filtre fosc per millorar la llegibilitat */}
       <div className="absolute inset-0 bg-black/30"></div>
 
-      {/* Capa 3: El contingut que es pot desplaçar (scroll) */}
       <div className="relative z-10 h-full overflow-y-auto p-6">
         <h1 className="text-4xl font-bold text-center mb-8 text-white drop-shadow-lg">Item Shop</h1>
         <div className="container mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {items?.map((item) => (
-                <ItemCard 
-                    key={item.itemId}
-                    item={item}
-                    onBuy={() => buyMutation.mutate(item.itemId)}
-                    isBuying={buyMutation.isPending && buyMutation.variables === item.itemId}
-                />
-              ))}
+            {items?.map((item) => (
+              <ItemCard key={item.itemId} item={item}>
+                <p className="text-lg font-bold text-yellow-400 mb-2">{item.price} Coins</p>
+                <button
+                  onClick={() => buyMutation.mutate(item.itemId)}
+                  disabled={buyMutation.isPending && buyMutation.variables === item.itemId}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition-colors disabled:bg-gray-500"
+                >
+                {buyMutation.isPending && buyMutation.variables === item.itemId ? 'Buying...' : 'Buy'}
+                </button>
+              </ItemCard>
+            ))}
           </div>
         </div>
       </div>

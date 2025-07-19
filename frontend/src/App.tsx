@@ -9,6 +9,7 @@ import RegisterPage from './pages/RegisterPage';
 import SchoolPage from './pages/SchoolPage';
 import SanctuaryPage from './pages/SanctuaryPage';
 import ShopPage from './pages/ShopPage';
+import InventoryPage from './pages/InventoryPage';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/school" element={<SchoolPage />} />
           <Route path="/sanctuary/:id" element={<SanctuaryPage />} />
           <Route path="/shop" element={<ShopPage />} />
+          <Route path="/inventory" element={<InventoryPage />} />
           {/* Future private routes like /shop or /inventory will go here */}
         </Route>
       </Route>

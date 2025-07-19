@@ -104,3 +104,20 @@ export type Item = {
   price: number;
   // 'effect' and 'weaponType' are not needed by the shop/inventory card, so we can omit them for now.
 };
+
+export type InventoryItemDto = {
+  itemId: string;
+  name: string;
+  description: string;
+  type: 'CONSUMABLE' | 'WEAPON';
+  imageUrl: string;
+  rarity: 'COMMON' | 'UNCOMMON' | 'RARE' | 'EPIC';
+  quantity: number;
+};
+
+export type DisplayableItem = {
+  name: string;
+  description: string;
+  imageUrl: string;
+  rarity: 'COMMON' | 'UNCOMMON' | 'RARE' | 'EPIC';
+};

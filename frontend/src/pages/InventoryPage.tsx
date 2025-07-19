@@ -1,0 +1,45 @@
+import { useQuery } from '@tanstack/react-query';
+import apiClient from '../lib/apiClient';
+import type { InventoryItemDto } from '../types';
+import { useAuthStore } from '../stores/authStore';
+import ItemCard from '../components/shop/ItemCard';
+
+const fetchInventory = async (token: string | null): Promise<InventoryItemDto[]> => {
+  if (!token) return [];
+  const { data } = await apiClient.get('/inventory', { headers: { Authorization: `Bearer ${token}` } });
+  return data;
+};
+
+export default function InventoryPage() {
+  const token = useAuthStore((state) => state.token);
+  const { data: inventory, isLoading } = useQuery({
+    queryKey: ['inventory'],
+    queryFn: () => fetchInventory(token),
+    enabled: !!token,
+  });
+
+  if (isLoading) return <div className="text-center p-10 text-white">Loading inventory...</div>;
+
+  return (
+    <div>
+      <h1 className="text-4xl font-bold text-center mb-8 text-white drop-shadow-lg">Your Inventory</h1>
+      {inventory && inventory.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {inventory.map((item) => (
+            <ItemCard key={item.itemId} item={item}>
+              <div className='flex justify-between items-center w-full'>
+                <span className='font-bold text-lg'>x{item.quantity}</span>
+                <div>
+                  {item.type === 'CONSUMABLE' && <button className="bg-green-500 text-white px-3 py-1 rounded text-sm">Use</button>}
+                  {item.type === 'WEAPON' && <button className="bg-purple-500 text-white px-3 py-1 rounded text-sm">Equip</button>}
+                </div>
+              </div>
+            </ItemCard>
+          ))}
+        </div>
+      ) : (
+        <p className="text-center text-white">Your inventory is empty.</p>
+      )}
+    </div>
+  );
+}
