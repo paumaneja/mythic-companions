@@ -10,6 +10,7 @@ export default {
     extend: {},
       fontFamily: {
         'bitcount': ['Bitcount', 'sans-serif'],
+        'rubik': ['Rubik Puddles', 'sans-serif'],
       },
   },
   plugins: [],
