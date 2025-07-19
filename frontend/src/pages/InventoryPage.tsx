@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import apiClient from '../lib/apiClient';
 import type { InventoryItemDto } from '../types';
 import { useAuthStore } from '../stores/authStore';
 import ItemCard from '../components/shop/ItemCard';
+import UseItemModal from '../components/inventory/UseItemModal';
 
 const fetchInventory = async (token: string | null): Promise<InventoryItemDto[]> => {
   if (!token) return [];
@@ -11,6 +13,7 @@ const fetchInventory = async (token: string | null): Promise<InventoryItemDto[]>
 };
 
 export default function InventoryPage() {
+  const [itemToUse, setItemToUse] = useState<InventoryItemDto | null>(null);
   const token = useAuthStore((state) => state.token);
   const { data: inventory, isLoading } = useQuery({
     queryKey: ['inventory'],
@@ -30,8 +33,8 @@ export default function InventoryPage() {
               <div className='flex justify-between items-center w-full'>
                 <span className='font-bold text-lg'>x{item.quantity}</span>
                 <div>
-                  {item.type === 'CONSUMABLE' && <button className="bg-green-500 text-white px-3 py-1 rounded text-sm">Use</button>}
-                  {item.type === 'WEAPON' && <button className="bg-purple-500 text-white px-3 py-1 rounded text-sm">Equip</button>}
+                  {item.type === 'CONSUMABLE' && <button onClick={() => setItemToUse(item)} className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm">Use</button>}
+                  {item.type === 'WEAPON' && <button className="bg-purple-500 hover:bg-purple-600 text-white px-3 py-1 rounded text-sm">Equip</button>}
                 </div>
               </div>
             </ItemCard>
@@ -40,6 +43,7 @@ export default function InventoryPage() {
       ) : (
         <p className="text-center text-white">Your inventory is empty.</p>
       )}
+      {itemToUse && <UseItemModal item={itemToUse} onClose={() => setItemToUse(null)} />}
     </div>
   );
 }
