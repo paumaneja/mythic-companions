@@ -56,7 +56,7 @@ export default function SanctuaryPage() {
   if (isError) return <div>Error loading companion data.</div>;
   if (!companion) return <div>Companion not found.</div>;
 
-  const backgroundUrl = `/src/assets/images/universes/${companion.universeId}.jpg`;
+  const backgroundUrl = `/src/assets/images/universes/${companion.universeId}.png`;
 
   return (
     <div
