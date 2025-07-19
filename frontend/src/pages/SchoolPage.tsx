@@ -4,7 +4,7 @@ import type { CompanionCardDto } from '../types';
 import { useAuthStore } from '../stores/authStore';
 import CompanionCard from '../components/companions/CompanionCard';
 import CompanionAdoptionCard from '../components/companions/CompanionAdoptionCard';
-import SchoolBackgroundImage from '../assets/images/school-background.jpg';
+import SchoolBackgroundImage from '../assets/images/school-background.png';
 
 const fetchCompanions = async (token: string | null): Promise<CompanionCardDto[]> => {
   if (!token) return [];
