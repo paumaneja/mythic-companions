@@ -1,6 +1,7 @@
 package com.mythiccompanions.api.controller;
 
 import com.mythiccompanions.api.dto.AdoptionUniverseDto;
+import com.mythiccompanions.api.model.Minigame;
 import com.mythiccompanions.api.model.Species;
 import com.mythiccompanions.api.model.UiTheme;
 import com.mythiccompanions.api.model.Universe;
@@ -39,5 +40,10 @@ public class GameDataController {
     @GetMapping("/ui-themes")
     public ResponseEntity<Map<String, UiTheme>> getUiThemes() {
         return ResponseEntity.ok(gameDataService.getUiThemes());
+    }
+
+    @GetMapping("/minigames")
+    public ResponseEntity<List<Minigame>> getAllMinigames() {
+        return ResponseEntity.ok(gameDataService.getMinigames());
     }
 }

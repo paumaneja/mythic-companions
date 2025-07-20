@@ -92,4 +92,8 @@ public class GameDataService {
     public Map<String, UiTheme> getUiThemes() {
         return gameData.getUiThemes();
     }
+
+    public List<Minigame> getMinigames() {
+        return gameData.getMinigames();
+    }
 }

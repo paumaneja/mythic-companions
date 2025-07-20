@@ -124,3 +124,10 @@ export type DisplayableItem = {
   imageUrl: string;
   rarity: 'COMMON' | 'UNCOMMON' | 'RARE' | 'EPIC';
 };
+
+export type Minigame = {
+  id: string;
+  name: string;
+  description: string;
+  enabled: boolean;
+};

@@ -10,6 +10,7 @@ import SchoolPage from './pages/SchoolPage';
 import SanctuaryPage from './pages/SanctuaryPage';
 import ShopPage from './pages/ShopPage';
 import InventoryPage from './pages/InventoryPage';
+import MinigameSelectionPage from './pages/MinigameSelectionPage';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/sanctuary/:id" element={<SanctuaryPage />} />
           <Route path="/shop" element={<ShopPage />} />
           <Route path="/inventory" element={<InventoryPage />} />
+          <Route path="/minigames" element={<MinigameSelectionPage />} />
           {/* Future private routes like /shop or /inventory will go here */}
         </Route>
       </Route>

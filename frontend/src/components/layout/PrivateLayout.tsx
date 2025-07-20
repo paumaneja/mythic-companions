@@ -20,6 +20,7 @@ const PrivateLayout = () => {
             <Link to="/school" className="hover:text-blue-400">School</Link>
             <Link to="/inventory" className="hover:text-blue-400">Inventory</Link>
             <Link to="/shop" className="hover:text-blue-400">Shop</Link>
+            <Link to="/minigames" className="hover:text-blue-400">Mini-Games</Link>
           </div>
 
           {/* Right Side: User Menu */}
