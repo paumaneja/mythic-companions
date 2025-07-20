@@ -1,10 +1,7 @@
 package com.mythiccompanions.api.controller;
 
 import com.mythiccompanions.api.dto.AdoptionUniverseDto;
-import com.mythiccompanions.api.model.Minigame;
-import com.mythiccompanions.api.model.Species;
-import com.mythiccompanions.api.model.UiTheme;
-import com.mythiccompanions.api.model.Universe;
+import com.mythiccompanions.api.model.*;
 import com.mythiccompanions.api.service.GameDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -45,5 +42,10 @@ public class GameDataController {
     @GetMapping("/minigames")
     public ResponseEntity<List<Minigame>> getAllMinigames() {
         return ResponseEntity.ok(gameDataService.getMinigames());
+    }
+
+    @GetMapping("/items")
+    public ResponseEntity<List<Item>> getAllItems() {
+        return ResponseEntity.ok(gameDataService.getItems());
     }
 }
