@@ -131,3 +131,20 @@ export type Minigame = {
   description: string;
   enabled: boolean;
 };
+
+export type MinigameResultDto = {
+        finalScore: number;
+        isNewHighScore: boolean;
+        rewards: MinigameRewardDto;
+};
+
+export type MinigameRewardDto = {
+        mythicCoins: number;
+        awardedItemId: string;
+        awardedItemQuantity: number;
+};
+
+export type SubmitScoreResponseDto = {
+  gameResult: MinigameResultDto;
+  user: UserDto;
+};

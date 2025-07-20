@@ -11,6 +11,7 @@ import SanctuaryPage from './pages/SanctuaryPage';
 import ShopPage from './pages/ShopPage';
 import InventoryPage from './pages/InventoryPage';
 import MinigameSelectionPage from './pages/MinigameSelectionPage';
+import ClickerGamePage from './pages/minigames/ClickerGamePage';
 
 function App() {
   return (
@@ -34,7 +35,8 @@ function App() {
           <Route path="/shop" element={<ShopPage />} />
           <Route path="/inventory" element={<InventoryPage />} />
           <Route path="/minigames" element={<MinigameSelectionPage />} />
-          {/* Future private routes like /shop or /inventory will go here */}
+          <Route path="/minigames" element={<MinigameSelectionPage />} />
+          <Route path="/minigames/clicker_game" element={<ClickerGamePage />} />
         </Route>
       </Route>
     </Routes>

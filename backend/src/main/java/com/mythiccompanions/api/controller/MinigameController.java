@@ -1,9 +1,11 @@
 package com.mythiccompanions.api.controller;
 
-import com.mythiccompanions.api.dto.MinigameResultDto;
 import com.mythiccompanions.api.dto.RankingDto;
 import com.mythiccompanions.api.dto.SubmitScoreRequestDto;
+import com.mythiccompanions.api.dto.SubmitScoreResponseDto;
+import com.mythiccompanions.api.mapper.UserMapper;
 import com.mythiccompanions.api.service.MinigameService;
+import com.mythiccompanions.api.service.ScoreSubmissionResult;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +21,21 @@ import java.util.List;
 public class MinigameController {
 
     private final MinigameService minigameService;
+    private final UserMapper userMapper;
 
     @PostMapping("/submit-score")
-    public ResponseEntity<MinigameResultDto> submitScore(
+    public ResponseEntity<SubmitScoreResponseDto> submitScore(
             @AuthenticationPrincipal UserDetails userDetails,
             @Valid @RequestBody SubmitScoreRequestDto scoreRequest) {
 
-        MinigameResultDto result = minigameService.submitScore(userDetails.getUsername(), scoreRequest);
-        return ResponseEntity.ok(result);
+        ScoreSubmissionResult result = minigameService.submitScore(userDetails.getUsername(), scoreRequest);
+
+        SubmitScoreResponseDto responseDto = new SubmitScoreResponseDto(
+                result.gameResult(),
+                userMapper.toDto(result.updatedUser())
+        );
+
+        return ResponseEntity.ok(responseDto);
     }
 
     @GetMapping("/ranking/{gameId}")

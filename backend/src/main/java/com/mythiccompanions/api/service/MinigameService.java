@@ -1,9 +1,6 @@
 package com.mythiccompanions.api.service;
 
-import com.mythiccompanions.api.dto.MinigameResultDto;
-import com.mythiccompanions.api.dto.MinigameRewardDto;
-import com.mythiccompanions.api.dto.RankingDto;
-import com.mythiccompanions.api.dto.SubmitScoreRequestDto;
+import com.mythiccompanions.api.dto.*;
 import com.mythiccompanions.api.entity.RankingEntry;
 import com.mythiccompanions.api.entity.User;
 import com.mythiccompanions.api.exception.ResourceNotFoundException;
@@ -31,7 +28,7 @@ public class MinigameService {
     private final Random random = new Random();
 
     @Transactional
-    public MinigameResultDto submitScore(String username, SubmitScoreRequestDto scoreRequest) {
+    public ScoreSubmissionResult submitScore(String username, SubmitScoreRequestDto scoreRequest) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found: " + username));
 
@@ -59,6 +56,7 @@ public class MinigameService {
 
         int coinsEarned = (int) (scoreRequest.score() * minigameData.getRewards().getCoinMultiplier());
         user.setMythicCoins(user.getMythicCoins() + coinsEarned);
+        User updatedUser = userRepository.save(user);
 
         String awardedItemId = null;
         if (Math.random() < minigameData.getRewards().getItemLootChance()) {
@@ -69,7 +67,9 @@ public class MinigameService {
         }
 
         MinigameRewardDto rewards = new MinigameRewardDto(coinsEarned, awardedItemId, awardedItemId != null ? 1 : 0);
-        return new MinigameResultDto(scoreRequest.score(), isNewHighScore, rewards);
+        MinigameResultDto gameResult = new MinigameResultDto(scoreRequest.score(), isNewHighScore, rewards);
+
+        return new ScoreSubmissionResult(gameResult, updatedUser);
     }
 
     private String pickRandomItemFromLootTable(List<LootTableEntry> lootTable) {
