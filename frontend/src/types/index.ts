@@ -148,3 +148,9 @@ export type SubmitScoreResponseDto = {
   gameResult: MinigameResultDto;
   user: UserDto;
 };
+
+export type LoreQuestion = {
+  question: string;
+  options: string[];
+  correctAnswer: number;
+};

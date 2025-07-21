@@ -513,3 +513,47 @@ minigames:
         - { itemId: "MIRACLE_ELIXIR", weight: 15 }
         - { itemId: "EXOTIC_FRUIT_PLATTER", weight: 5 }
         - { itemId: "PHOENIX_DOWN", weight: 5 }
+
+lore_quiz:
+  GALACTIC_REBELLION:
+    - { question: "What material is resistant to lightsabers?", options: ["Beskar", "Durasteel", "Cortosis", "All the above"], correctAnswer: 3 }
+    - { question: "What is the name of the home planet of the Wookiees, Chewbacca's race?", options: ["Kashyyyk", "Endor", "Hoth", "Yavin IV"], correctAnswer: 0 }
+    - { question: "Which ship made the 'Kessel Run' in less than 12 parsecs?", options: ["X-Wing", "Star Destroyer", "Millennium Falcon", "TIE Fighter"], correctAnswer: 2 }
+    - { question: "What is the title given to the leader of the Jedi Council?", options: ["Grand Master", "Jedi Lord", "Order Captain", "Jedi General"], correctAnswer: 0 }
+    - { question: "The Jawas, inhabitants of Tatooine, are known for trading with...", options: ["Spaceships", "Weapons", "Droids and Scrap", "Species"], correctAnswer: 2 }
+    - { question: "Which Service Droid was built by a young Anakin Skywalker?", options: ["R2-D2", "C-3PO", "BB-8", "K-2SO"], correctAnswer: 1 }
+    - { question: "Which forest moon is home to the Ewoks?", options: ["Yavin IV", "Dxun", "Sanctuary Moon of Endor", "Jedha"], correctAnswer: 2 }
+    - { question: "The standard weapon of the imperial infantry is the...", options: ["E-11 Blaster Rifle", "Wookiee Crossbow", "Sniper Rifle", "Ion Cannon"], correctAnswer: 0 }
+    - { question: "Who trained Obi-Wan Kenobi in the ways of the Force?", options: ["Yoda", "Mace Windu", "Plo Koon", "Qui-Gon Jinn"], correctAnswer: 3 }
+    - { question: "What is Admiral Ackbar's most famous line?", options: ["'I have a bad feeling about this'", "'It's a trap!'", "'Do or do not. There is no try.'", "'May the Force be with you.'"], correctAnswer: 1 }
+    - { question: "Which planet was destroyed by the first Death Star?", options: ["Naboo", "Alderaan", "Corellia", "Chandrila"], correctAnswer: 1 }
+    - { question: "Besides spears, what other weapon do Ewoks use to hunt?", options: ["Nets", "Laser pistols", "Grenades", "Poison Darts"], correctAnswer: 0 }
+    - { question: "The most iconic starfighter of the Rebel Alliance is the...", options: ["A-Wing", "B-Wing", "Y-Wing", "X-Wing"], correctAnswer: 3 }
+    - { question: "What is the name of the clan that the Mandalorian, Din Djarin, belongs to?", options: ["Clan Wren", "Clan Vizsla", "No Clan", "Tribe of Two Suns"], correctAnswer: 2 }
+    - { question: "Which Service Droid has a primarily fearful and cautious personality?", options: ["R2-D2", "C-3PO", "L3-37", "Chopper"], correctAnswer: 1 }
+    - { question: "Which Force ability allows Jedi to influence the minds of the weak?", options: ["Force Push", "Force Choke", "Jedi Mind Trick", "Force Speed"], correctAnswer: 2 }
+    - { question: "What is the power source of a lightsaber?", options: ["A Kyber crystal", "An energy battery", "The midichlorians", "A mini-fusion reactor"], correctAnswer: 0 }
+    - { question: "What title do the dark lords of the Sith have?", options: ["Master", "General", "Lord", "Commander"], correctAnswer: 2 }
+    - { question: "What vehicle do Stormtroopers use in desert areas?", options: ["AT-AT", "Speeder bike", "Dewback", "Sandcrawler"], correctAnswer: 2 }
+    - { question: "Which Ewok befriends Princess Leia on Endor?", options: ["Wicket", "Teebo", "Logray", "Chirpa"], correctAnswer: 0 }
+  SQUIZZY_WORLD:
+    - { question: "What magical object allows Unicorns to create rainbows?", options: ["Their horn", "A shining wand", "A precious stone", "Their tears"], correctAnswer: 0 }
+    - { question: "What is the Bunnies' favorite vegetable?", options: ["Lettuce", "Broccoli", "Shiny carrot", "Pepper"], correctAnswer: 2 }
+    - { question: "What are the kitties with wings in Squizzy World called?", options: ["Angel-cats", "Happy-wings", "Kitt-wings", "They don't exist"], correctAnswer: 1 }
+    - { question: "What is the sound a Gummy Critter makes when it's happy?", options: ["A sugary 'pop'", "A melodious whistle", "A gelatinous laugh", "A 'boing'"], correctAnswer: 3 }
+    - { question: "Where do Rainbow Lollipops grow?", options: ["On candy trees", "Underground, like mushrooms", "In lemonade rivers", "In jelly bean fields"], correctAnswer: 0 }
+    - { question: "What power does a Cat's Purr Melody have?", options: ["Put people to sleep", "Calm any creature", "Break glass", "Talk to fish"], correctAnswer: 1 }
+    - { question: "What happens when a Bunny eats a Puff of Fluff?", options: ["It becomes invisible", "Starts sneezing non-stop", "Turns into a giant furball", "Can fly for a minute"], correctAnswer: 2 }
+    - { question: "A Unicorn's Dream Dust is used for...", options: ["Bake cakes", "Create pleasant dreams", "Paint pictures", "Make love potions"], correctAnswer: 1 }
+    - { question: "What is the most popular drink in Squizzy World?", options: ["Cloud Juice", "Magic Fountain Water", "Glittery Chocolate Milk", "Bubble Peach Soda"], correctAnswer: 0 }
+    - { question: "How do the Cats in Squizzy World communicate?", options: ["With color-changing yowls", "Telepathically", "Through dances", "With the language of shadows"], correctAnswer: 0 }
+    - { question: "A Bunny's Bouncing Wave can...", options: ["Create earthquakes", "Bounce enemies", "Turn water into jelly", "Cook an egg"], correctAnswer: 1 }
+    - { question: "What is the material Plush Paws are made of?", options: ["Hardened cotton candy", "Soft dragon fur", "Dream wool", "Spider silk enchanted"], correctAnswer: 2 }
+    - { question: "The Sleepy Yawn is an effective weapon because...", options: ["It stinks a lot", "It's extremely contagious", "It makes a deafening noise", "It throws little sheep"], correctAnswer: 1 }
+    - { question: "What is the rarity of a two-colored Unicorn?", options: ["Common", "Non-existent", "Legendary", "Uncommon"], correctAnswer: 2 }
+    - { question: "Where do Gummy Critters live?", options: ["In the chocolate mountains", "In the licorice forests", "In the sugar crystal caves", "In the jam pools"], correctAnswer: 1 }
+    - { question: "What is a Glitter Beam for?", options: ["To dazzle and confuse", "To cut objects", "To clean dust", "To illuminate the path"], correctAnswer: 0 }
+    - { question: "Exactly how many colors does the Rainbow Wave have?", options: ["7", "As many as you can imagine", "12", "Depends on the Unicorn's mood"], correctAnswer: 1 }
+    - { question: "A 'Puff of Fluff' is soft but dangerous because...", options: ["It's extremely flammable", "It explodes in a tickling cloud", "It's sticky like glue", "It has a very hard seed inside"], correctAnswer: 2 }
+    - { question: "The Cats of Squizzy World's favorite toy is...", options: ["A ball of star wool", "A string mouse", "A laser pointer", "A bouncing ball"], correctAnswer: 0 }
+    - { question: "What does it take to make a Bunny do a Bouncy Impact?", options: ["Give it a carrot", "Tell him a joke", "Tickle him", "Make him jump from a very high place"], correctAnswer: 3 }

@@ -13,6 +13,7 @@ import InventoryPage from './pages/InventoryPage';
 import MinigameSelectionPage from './pages/MinigameSelectionPage';
 import ClickerGamePage from './pages/minigames/ClickerGamePage';
 import MemoryGamePage from './pages/minigames/MemoryGamePage';
+import LoreQuizPage from './pages/minigames/LoreQuizPage';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/minigames" element={<MinigameSelectionPage />} />
           <Route path="/minigames/clicker_game" element={<ClickerGamePage />} />
           <Route path="/minigames/memory_game" element={<MemoryGamePage />} />
+          <Route path="/minigames/lore_quiz" element={<LoreQuizPage />} />
         </Route>
       </Route>
     </Routes>

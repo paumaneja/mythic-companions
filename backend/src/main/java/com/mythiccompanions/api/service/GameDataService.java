@@ -96,4 +96,6 @@ public class GameDataService {
     public List<Minigame> getMinigames() {
         return gameData.getMinigames();
     }
+
+    public Map<String, List<LoreQuestion>> getLoreQuiz() { return gameData.getLoreQuiz(); }
 }

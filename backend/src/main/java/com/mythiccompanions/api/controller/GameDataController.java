@@ -48,4 +48,9 @@ public class GameDataController {
     public ResponseEntity<List<Item>> getAllItems() {
         return ResponseEntity.ok(gameDataService.getItems());
     }
+
+    @GetMapping("/lore-quiz")
+    public ResponseEntity<Map<String, List<LoreQuestion>>> getLoreQuiz() {
+        return ResponseEntity.ok(gameDataService.getLoreQuiz());
+    }
 }

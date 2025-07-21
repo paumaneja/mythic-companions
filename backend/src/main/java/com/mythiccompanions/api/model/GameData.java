@@ -27,4 +27,7 @@ public class GameData {
 
     @JsonProperty("minigames")
     private List<Minigame> minigames;
+
+    @JsonProperty("lore_quiz")
+    private Map<String, List<LoreQuestion>> loreQuiz;
 }
