@@ -154,3 +154,7 @@ export type LoreQuestion = {
   options: string[];
   correctAnswer: number;
 };
+
+export type ApiError = {
+  error: string;
+};

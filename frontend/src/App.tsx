@@ -14,6 +14,7 @@ import MinigameSelectionPage from './pages/MinigameSelectionPage';
 import ClickerGamePage from './pages/minigames/ClickerGamePage';
 import MemoryGamePage from './pages/minigames/MemoryGamePage';
 import LoreQuizPage from './pages/minigames/LoreQuizPage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
       {/* Private routes, guarded by ProtectedRoute and using PrivateLayout */}
       <Route element={<ProtectedRoute />}>
         <Route element={<PrivateLayout />}>
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/school" element={<SchoolPage />} />
           <Route path="/sanctuary/:id" element={<SanctuaryPage />} />
           <Route path="/shop" element={<ShopPage />} />
