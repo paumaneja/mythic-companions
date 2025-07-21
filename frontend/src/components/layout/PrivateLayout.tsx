@@ -1,14 +1,7 @@
-import { Outlet, Link, useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../../stores/authStore';
+import { Outlet, Link } from 'react-router-dom';
+import UserMenu from './UserMenu';
 
 const PrivateLayout = () => {
-  const { user, logout } = useAuthStore();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
 
   return (
     <div className="flex flex-col h-screen">
@@ -24,16 +17,7 @@ const PrivateLayout = () => {
           </div>
 
           {/* Right Side: User Menu */}
-          <div className="flex items-center space-x-4">
-            <span>{user?.mythicCoins} Coins</span>
-            <div className="relative">
-               {/* TODO: Implement dropdown menu */}
-               <span className="font-bold">{user?.username}</span>
-            </div>
-            <button onClick={handleLogout} className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">
-              Logout
-            </button>
-          </div>
+          <UserMenu />
         </nav>
       </header>
 

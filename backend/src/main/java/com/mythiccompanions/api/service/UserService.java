@@ -6,6 +6,7 @@ import com.mythiccompanions.api.exception.ResourceNotFoundException;
 import com.mythiccompanions.api.exception.UserAlreadyExistsException;
 import com.mythiccompanions.api.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -62,5 +63,14 @@ public class UserService {
 
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public void updatePassword(String username, String oldPassword, String newPassword) {
+        User user = findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+            throw new BadCredentialsException("Invalid old password.");
+        }
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
     }
 }
