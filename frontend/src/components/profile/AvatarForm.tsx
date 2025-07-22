@@ -29,7 +29,6 @@ export default function AvatarForm({ user }: Props) {
       <div className="relative w-48 h-48 mx-auto group">
         <img 
           src={user.avatarUrl || '/assets/images/default-avatar.png'} 
-          alt="User avatar" 
           className="w-full h-full rounded-full object-cover"
         />
         <div 

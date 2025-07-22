@@ -41,7 +41,6 @@ export default function SanctuaryPage() {
         videoUrl = actions.train[weaponId];
       }
     } else {
-      // Access other actions safely
       videoUrl = actions[actionName as keyof Omit<typeof actions, 'train'>];
     }
   

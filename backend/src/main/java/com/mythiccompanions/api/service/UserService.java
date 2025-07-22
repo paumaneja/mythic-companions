@@ -52,7 +52,6 @@ public class UserService {
 
         User updatedUser = userRepository.save(user);
 
-        // If the update was successful and there was an old avatar, delete the old file
         if (oldAvatarUrl != null && !oldAvatarUrl.isBlank()) {
             String oldFilename = oldAvatarUrl.substring(oldAvatarUrl.lastIndexOf("/") + 1);
             storageService.delete(oldFilename);

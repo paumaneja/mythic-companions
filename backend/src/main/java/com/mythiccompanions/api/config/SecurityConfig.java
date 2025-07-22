@@ -66,7 +66,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/**", "/api/v1/shop/**", "/api/v1/minigames/ranking/**").permitAll()
+                        .requestMatchers("/api/v1/auth/**", "/api/v1/shop/**", "/api/v1/minigames/ranking/**", "/avatars/**", "/users/me/avatar/**").permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/minigames/ranking/**", "/api/v1/game-data/**").permitAll()
                         .anyRequest().authenticated()
                 )
