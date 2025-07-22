@@ -6,11 +6,12 @@ interface Props {
   cooldownTimestamp: string | null;
   onClick: () => void;
   isMutating: boolean;
+  isActionEnabled: boolean;
 }
 
-export default function ActionButton({ label, iconUrl, cooldownTimestamp, onClick, isMutating }: Props) {
+export default function ActionButton({ label, iconUrl, cooldownTimestamp, onClick, isMutating, isActionEnabled }: Props) {
   const { isOnCooldown, timeLeftFormatted } = useCooldown(cooldownTimestamp);
-  const isDisabled = isOnCooldown || isMutating;
+  const isDisabled = !isActionEnabled || isOnCooldown || isMutating;
 
   return (
     <button
