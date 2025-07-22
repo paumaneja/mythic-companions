@@ -42,18 +42,20 @@ export default function MemoryGamePage() {
 
   // Efecte per al temporitzador del joc
   useEffect(() => {
-    if (gameState !== 'PLAYING' || timeLeft <= 0) return;
-    if (cards.length > 0 && cards.every(c => c.isMatched)) return;
+    if (gameState !== 'PLAYING') return;
 
-    const timer = setInterval(() => setTimeLeft(t => t - 1), 1000);
-    
-    if (timeLeft === 0) {
-      clearInterval(timer);
-      setGameState('FINISHED');
-      submitScore(0);
-    }
+    const timer = setInterval(() => {
+        setTimeLeft(t => {
+            if (t <= 1) {
+                clearInterval(timer);
+                setGameState('FINISHED');
+                return 0;
+            }
+            return t - 1;
+        });
+    }, 1000);
     return () => clearInterval(timer);
-  }, [gameState, timeLeft, cards, submitScore]);
+  }, [gameState]);
 
   // Efecte per comprovar les parelles
   useEffect(() => {
@@ -84,12 +86,19 @@ export default function MemoryGamePage() {
 
   // Efecte per comprovar la victòria
   useEffect(() => {
-    if (cards.length > 0 && cards.every(c => c.isMatched)) {
-        setGameState('FINISHED');
-        const score = Math.max(0, (timeLeft * 10) - moves);
-        submitScore(score);
+    if (gameState === 'PLAYING') {
+      const allMatched = cards.length > 0 && cards.every(c => c.isMatched);
+      if (allMatched) {
+        setGameState('FINISHED'); // Guanya per trobar parelles
+      }
     }
-  }, [cards, timeLeft, moves, submitScore]);
+    
+    if (gameState === 'FINISHED') {
+        const allMatched = cards.length > 0 && cards.every(c => c.isMatched);
+        const finalScore = allMatched ? Math.max(0, (timeLeft * 10) - moves) : 0;
+        submitScore(finalScore);
+    }
+  }, [gameState, cards, timeLeft, moves, submitScore]);
 
   const handleStart = () => {
     if (allItems) {
@@ -141,7 +150,8 @@ export default function MemoryGamePage() {
             ></div>
             <div className="absolute inset-0 bg-black/30"></div>
             <MinigameResultModal 
-            result={gameResult} 
+            result={gameResult}
+            gameId="MEMORY_GAME"
             onPlayAgain={handleStart}
             onExit={() => navigate('/minigames')}
             />

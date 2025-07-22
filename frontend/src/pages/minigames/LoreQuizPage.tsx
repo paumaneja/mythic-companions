@@ -110,7 +110,8 @@ export default function LoreQuizPage() {
             ></div>
             <div className="absolute inset-0 bg-black/30"></div>
             <MinigameResultModal 
-                result={gameResult} 
+                result={gameResult}
+                gameId="LORE_QUIZ"
                 onPlayAgain={handleStart}
                 onExit={() => navigate('/minigames')}
             />

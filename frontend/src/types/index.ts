@@ -158,3 +158,9 @@ export type LoreQuestion = {
 export type ApiError = {
   error: string;
 };
+
+export type RankingDto = {
+  username: string;
+  avatarUrl: string | null;
+  score: number;
+};

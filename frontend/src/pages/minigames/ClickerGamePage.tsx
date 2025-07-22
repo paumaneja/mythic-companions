@@ -36,15 +36,23 @@ export default function ClickerGamePage() {
   });
 
   useEffect(() => {
-    if (gameState !== 'PLAYING') return;
-    if (timeLeft <= 0) {
-      setGameState('FINISHED');
-      submitScore(score);
+    if (gameState !== 'PLAYING') {
       return;
     }
-    const timer = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
+    
+    const timer = setInterval(() => {
+      setTimeLeft(prevTime => {
+        if (prevTime <= 1) {
+          clearInterval(timer);
+          setGameState('FINISHED');
+          return 0;
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
+
     return () => clearInterval(timer);
-  }, [gameState, timeLeft, score, submitScore]);
+  }, [gameState]);
 
   useEffect(() => {
     if (gameState !== 'PLAYING') return;
@@ -61,6 +69,12 @@ export default function ClickerGamePage() {
     const moveInterval = setInterval(moveTarget, TARGET_MOVE_INTERVAL);
     return () => clearInterval(moveInterval);
   }, [gameState]);
+
+  useEffect(() => {
+    if (gameState === 'FINISHED') {
+      submitScore(score);
+    }
+  }, [gameState, score, submitScore]);
 
   const handleStart = () => {
     setScore(0);
@@ -99,7 +113,8 @@ export default function ClickerGamePage() {
             ></div>
             <div className="absolute inset-0 bg-black/30"></div>
             <MinigameResultModal 
-                result={gameResult} 
+                result={gameResult}
+                gameId="CLICKER_GAME"
                 onPlayAgain={handleStart}
                 onExit={() => navigate('/minigames')}
             />
