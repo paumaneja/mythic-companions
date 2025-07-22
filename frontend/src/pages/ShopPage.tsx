@@ -29,11 +29,9 @@ export default function ShopPage() {
         console.log("Data received after purchase:", updatedUser);
         alert('Purchase successful!');
         if (token) {
-            // Actualitzem la nostra botiga global (el "marcador central") amb les noves dades
             setToken(token, updatedUser);
         }
 
-        // Invalidem la query de l'inventari per si l'usuari hi navega després
         queryClient.invalidateQueries({ queryKey: ['inventory'] });
     },
     onError: (error) => {
@@ -53,7 +51,7 @@ export default function ShopPage() {
 
       <div className="absolute inset-0 bg-black/30"></div>
 
-      <div className="relative z-10 h-full flex flex-col">
+      <div className="relative h-full flex flex-col">
         <header className="p-6">
           <h1 className="text-4xl font-bold text-center text-white drop-shadow-lg">Item Shop</h1>
         </header>

@@ -25,7 +25,7 @@ export default function MinigameSelectionPage() {
       ></div>
       <div className="absolute inset-0 bg-black/30"></div>
 
-      <div className="relative z-10 h-full overflow-y-auto p-6">
+      <div className="relative h-full overflow-y-auto p-6">
         <header className="p-6">
           <h1 className="text-4xl font-bold text-center text-white drop-shadow-lg">Select a Minigame</h1>
         </header>

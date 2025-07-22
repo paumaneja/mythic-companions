@@ -35,7 +35,7 @@ export default function InventoryPage() {
 
       <div className="absolute inset-0 bg-black/30"></div>
 
-      <div className="relative z-10 h-full flex flex-col">
+      <div className="relative h-full flex flex-col">
         <header className="p-6">
           <h1 className="text-4xl font-bold text-center text-white drop-shadow-lg">Your Inventory</h1>
         </header>

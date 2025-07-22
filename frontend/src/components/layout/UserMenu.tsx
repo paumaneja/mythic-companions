@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../stores/authStore';
 import { useClickOutside } from '../../hooks/useClickOutside';
+import defaultAvatar from '../../assets/images/default-avatar.png';
 
 export default function UserMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +24,7 @@ export default function UserMenu() {
     <div ref={domNode} className="relative">
       <button onClick={() => setIsOpen(!isOpen)} className="flex items-center space-x-2">
         <img 
-          src={user.avatarUrl || '/assets/images/default-avatar.png'} 
+          src={user.avatarUrl || defaultAvatar} 
           alt="User Avatar"
           className="w-10 h-10 rounded-full object-cover border-2 border-gray-500"
         />
