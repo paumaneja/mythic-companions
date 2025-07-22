@@ -44,14 +44,19 @@ export default function ActionBar({ companion, onActionStart }: Props) {
     });
   };
 
+  const status = companion.status;
+  const isWeaponEquipped = companion.equippedWeapon !== null;
+
   return (
-    <div className="p-10">
-        <div className="grid grid-cols-5 gap-8">
-            <ActionButton label="Feed" iconUrl={icons?.feed} cooldownTimestamp={companion.cooldowns.feed} onClick={() => handleActionClick('feed')} isMutating={feedMutation.isPending} />
-            <ActionButton label="Play" iconUrl={icons?.play} cooldownTimestamp={companion.cooldowns.play} onClick={() => handleActionClick('play')} isMutating={playMutation.isPending} />
-            <ActionButton label="Clean" iconUrl={icons?.clean} cooldownTimestamp={companion.cooldowns.clean} onClick={() => handleActionClick('clean')} isMutating={cleanMutation.isPending} />
-            <ActionButton label="Sleep" iconUrl={icons?.sleep} cooldownTimestamp={companion.cooldowns.sleep} onClick={() => handleActionClick('sleep')} isMutating={sleepMutation.isPending} />
-            <ActionButton label="Train" iconUrl={icons?.train} cooldownTimestamp={companion.cooldowns.train} onClick={() => handleActionClick('train')} isMutating={trainMutation.isPending} />
+    <div className="rounded-lg p-2 shadow-lg backdrop-blur-md">
+        <div className="grid grid-cols-5 gap-6">
+
+            <ActionButton label="Feed"  iconUrl={icons?.feed}  cooldownTimestamp={companion.cooldowns.feed}  onClick={() => handleActionClick('feed')}  isMutating={feedMutation.isPending}  isActionEnabled={status !== 'HOSPITALIZED' && !isWeaponEquipped} />
+            <ActionButton label="Play"  iconUrl={icons?.play}  cooldownTimestamp={companion.cooldowns.play}  onClick={() => handleActionClick('play')}  isMutating={playMutation.isPending}  isActionEnabled={status !== 'HOSPITALIZED' && !isWeaponEquipped} />
+            <ActionButton label="Clean" iconUrl={icons?.clean} cooldownTimestamp={companion.cooldowns.clean} onClick={() => handleActionClick('clean')} isMutating={cleanMutation.isPending} isActionEnabled={status !== 'HOSPITALIZED' && !isWeaponEquipped} />
+            <ActionButton label="Sleep" iconUrl={icons?.sleep} cooldownTimestamp={companion.cooldowns.sleep} onClick={() => handleActionClick('sleep')} isMutating={sleepMutation.isPending} isActionEnabled={status !== 'HOSPITALIZED' && !isWeaponEquipped} />
+            
+            <ActionButton label="Train" iconUrl={icons?.train} cooldownTimestamp={companion.cooldowns.train} onClick={() => handleActionClick('train')} isMutating={trainMutation.isPending} isActionEnabled={status === 'ACTIVE' && isWeaponEquipped} />
         </div>
     </div>
   );
