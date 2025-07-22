@@ -6,6 +6,7 @@ import { useAuthStore } from '../../stores/authStore';
 import type { MinigameResultDto, SubmitScoreResponseDto } from '../../types';
 import MinigameResultModal from '../../components/minigames/MinigameResultModal';
 import MinigamesBackgroundImage from '../../assets/images/minigames-background.png';
+import defaultAvatar from '../../assets/images/default-avatar.png';
 
 type GameState = 'WELCOME' | 'PLAYING' | 'FINISHED';
 const GAME_DURATION = 20;
@@ -143,7 +144,7 @@ export default function ClickerGamePage() {
                     style={{ 
                         top: targetPosition.top, 
                         left: targetPosition.left,
-                        backgroundImage: `url(${user?.avatarUrl || '/assets/images/me.jpg'})`
+                        backgroundImage: `url(${user?.avatarUrl || defaultAvatar})`
                     }}
                 />
             </div>
