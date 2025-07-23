@@ -51,7 +51,7 @@ export default function ShopPage() {
 
       <div className="absolute inset-0 bg-black/30"></div>
 
-      <div className="relative h-full flex flex-col">
+      <div className="relative h-full flex flex-col font-tomorrow">
         <header className="p-6">
           <h1 className="text-4xl font-bold text-center text-white drop-shadow-lg">Item Shop</h1>
         </header>

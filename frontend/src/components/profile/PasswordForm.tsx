@@ -22,7 +22,7 @@ export default function PasswordForm() {
   };
 
   return (
-    <div className="bg-gray-800/50 p-6 rounded-lg">
+    <div className="bg-gray-800/50 p-6 rounded-lg font-tomorrow">
         <h2 className="text-2xl font-bold mb-4">Change Password</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <input {...register('oldPassword', { required: true })} type="password" placeholder="Current password" className="w-full p-2 rounded bg-gray-700 border border-gray-600"/>

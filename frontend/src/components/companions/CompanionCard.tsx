@@ -23,8 +23,8 @@ export default function CompanionCard({ companion }: CompanionCardProps) {
           <StatusIndicator status={companion.status} />
         </div>
         <div className="w-full rounded-lg bg-gray-800/80 p-1">
-          <h3 className="font-bitcount text-center text-2xl text-white">{companion.name}</h3>
-          <p className="font-bitcount text-center text-sm text-white capitalize">{companion.speciesId.toLowerCase().replace('_', ' ')}</p>
+          <h3 className="font-tomorrow text-center text-2xl text-white">{companion.name}</h3>
+          <p className="font-tomorrow text-center text-sm text-white capitalize">{companion.speciesId.toLowerCase().replace('_', ' ')}</p>
         </div>
       </div>  
     </Link>

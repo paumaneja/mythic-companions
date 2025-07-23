@@ -13,8 +13,8 @@ export default function StatBar({ label, value, maxValue = 100, colorClass, orie
     return (
       <div>
         <div className="flex justify-between items-center mb-1">
-          <span className="text-sm font-semibold text-gray-700">{label}</span>
-          <span className="text-sm font-semibold text-gray-700">{value} / {maxValue}</span>
+          <span className="text-sm font-semibold text-white">{label}</span>
+          <span className="text-sm font-semibold text-white">{value} / {maxValue}</span>
         </div>
         <div className="w-full bg-gray-200 rounded-full h-4">
           <div
@@ -35,6 +35,7 @@ export default function StatBar({ label, value, maxValue = 100, colorClass, orie
         ></div>
       </div>
       <span className="text-xs font-semibold text-gray-700 mt-1">{label}</span>
+      <span className="text-sm font-semibold text-gray-700">{value} / {maxValue}</span>
     </div>
   );
 }

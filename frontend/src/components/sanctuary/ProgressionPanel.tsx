@@ -11,13 +11,13 @@ export default function ProgressionPanel({ progression }: ProgressionPanelProps)
 
   return (
     <div className="bg-gray-900/50 backdrop-blur-md p-6 rounded-lg shadow-lg text-white h-full flex flex-col">
-      <h2 className="text-center text-2xl font-bold mb-4 border-b border-white/20 pb-2">Progression</h2>
+      <h2 className="font-tomorrow text-center text-2xl font-bold mb-4 border-b border-white/20 pb-2">Progression</h2>
       <div className="flex-1 flex items-center justify-between gap-4">
-          <div className="text-center pl-6">
-            <p className="text-lg text-gray-600">Level</p>
-            <p className="text-5xl font-bold text-gray-900">{progression.level}</p>
+          <div className="font-tomorrow text-center text-white pl-6">
+            <p className="text-lg">Level</p>
+            <p className="text-5xl font-bold">{progression.level}</p>
           </div>
-          <div className="h-3/4 pr-6">
+          <div className="font-tomorrow h-3/4 pr-6">
             <StatBar
               label="XP"
               value={progression.currentXpInLevel}

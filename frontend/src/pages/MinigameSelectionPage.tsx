@@ -18,7 +18,7 @@ export default function MinigameSelectionPage() {
   if (isLoading) return <div className="text-center p-10 text-white">Loading Games...</div>;
 
   return (
-    <div className="relative h-full w-full flex flex-col">
+    <div className="relative h-full w-full flex flex-col font-tomorrow">
       <div 
         className="absolute inset-0 bg-cover bg-center bg-fixed" 
         style={{ backgroundImage: `url(${MinigamesBackgroundImage})` }}

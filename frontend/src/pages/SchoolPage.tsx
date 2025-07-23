@@ -28,12 +28,11 @@ export default function SchoolPage() {
   return (
     <div className="bg-cover bg-center min-h-full" style={{ backgroundImage: `url(${SchoolBackgroundImage})` }}>
       <div className="container mx-auto p-4">
-        <h1 className="font-bitcount text-center text-3xl p-2 text-white">Your Companions</h1>
+        <h1 className="font-tomorrow font-bold text-center text-4xl p-2 text-white">Your Companions</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center p-2">
           {companions?.map((companion) => (
             <CompanionCard key={companion.id} companion={companion} />
           ))}
-          {/* We render the adoption card if the user has less than 6 companions */}
           {companions && companions.length < 6 && (
             <CompanionAdoptionCard existingSpeciesIds={existingSpeciesIds} />
           )}

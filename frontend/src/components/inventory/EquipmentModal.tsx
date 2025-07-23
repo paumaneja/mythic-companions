@@ -37,7 +37,6 @@ export default function EquipmentModal({ item, onClose }: Props) {
     });
   };
 
-  // LÒGICA DE FILTRAT: Mostrem només companions compatibles
   const compatibleCompanions = companions?.filter(companion => {
     const speciesData = allSpecies?.find(s => s.speciesId === companion.speciesId);
     return speciesData?.allowedWeaponTypes?.includes(item.weaponType || '');
@@ -45,9 +44,9 @@ export default function EquipmentModal({ item, onClose }: Props) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-      <div className="bg-gray-800 text-white p-6 rounded-lg shadow-xl w-full max-w-sm">
-        <h2 className="text-2xl font-bold mb-4">Equip {item.name}</h2>
-        <p className="mb-4 text-gray-300">Select a compatible companion:</p>
+      <div className="bg-gray-800 font-tomorrow text-white p-6 rounded-lg shadow-xl w-full max-w-sm">
+        <h2 className="text-2xl font-tomorrow font-bold mb-4">Equip {item.name}</h2>
+        <p className="mb-4 font-tomorrow text-gray-300">Select a compatible companion:</p>
 
         <select
           value={selectedCompanionId}
@@ -58,7 +57,7 @@ export default function EquipmentModal({ item, onClose }: Props) {
           {compatibleCompanions?.map(c => <option key={c.id} value={c.id}>{c.name} ({c.speciesId})</option>)}
         </select>
 
-        <div className="flex justify-end space-x-4">
+        <div className="flex justify-end space-x-4 font-tomorrow">
           <button onClick={onClose} className="px-4 py-2 bg-gray-600 rounded">Cancel</button>
           <button onClick={handleConfirm} disabled={equipMutation.isPending} className="px-4 py-2 bg-purple-500 text-white rounded disabled:bg-gray-500">
             {equipMutation.isPending ? 'Equipping...' : 'Confirm'}

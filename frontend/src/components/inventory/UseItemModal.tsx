@@ -42,7 +42,7 @@ export default function UseItemModal({ item, onClose }: Props) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-      <div className="bg-gray-800 text-white p-6 rounded-lg shadow-xl w-full max-w-sm">
+      <div className="bg-gray-800 font-tomorrow text-white p-6 rounded-lg shadow-xl w-full max-w-sm">
         <h2 className="text-2xl font-bold mb-4">Use {item.name}</h2>
         <p className="mb-4 text-gray-300">Select a companion to use this item on:</p>
 

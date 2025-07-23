@@ -10,7 +10,7 @@ interface Props {
 
 export default function MinigameResultModal({ result, gameId, onPlayAgain, onExit }: Props) {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 font-tomorrow">
       <div className="bg-gray-800 text-white p-8 rounded-lg shadow-xl text-center">
         <h2 className="text-3xl font-bold mb-4">{result.isNewHighScore ? 'New High Score!' : 'Game Over!'}</h2>
         <p className="text-xl mb-4">Your score: <span className="font-bold text-yellow-400">{result.finalScore}</span></p>

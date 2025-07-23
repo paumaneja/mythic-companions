@@ -125,13 +125,13 @@ export default function MemoryGamePage() {
 
   if (gameState === 'WELCOME') {
     return (
-        <div className="text-center text-white">
+        <div className="text-center text-white font-tomorrow">
             <div 
             className="absolute inset-0 bg-cover bg-center bg-fixed" 
             style={{ backgroundImage: `url(${MinigamesBackgroundImage})` }}
             >
-            <h1 className="text-4xl font-bold">Memory Game</h1>
-            <p className="mt-4 mb-8">Find all the matching pairs before time runs out!</p>
+            <h1 className="pt-20 text-4xl font-bold">Memory Game</h1>
+            <p className="mt-8 mb-8">Find all the matching pairs before time runs out!</p>
             <button onClick={handleStart} className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded text-xl" disabled={isLoadingItems}>
                 {isLoadingItems ? 'Loading Assets...' : 'Start Game'}
             </button>
@@ -141,9 +141,9 @@ export default function MemoryGamePage() {
   }
 
   if (gameState === 'FINISHED') {
-    if (isSubmitting) return <div className="text-white text-center">Submitting score...</div>;
+    if (isSubmitting) return <div className="text-white text-center font-tomorrow">Submitting score...</div>;
     if (gameResult) return (
-        <div className="relative h-full w-full flex flex-col">
+        <div className="relative h-full w-full flex flex-col font-tomorrow">
             <div 
                 className="absolute inset-0 bg-cover bg-center bg-fixed" 
                 style={{ backgroundImage: `url(${MinigamesBackgroundImage})` }}
@@ -157,11 +157,11 @@ export default function MemoryGamePage() {
             />
         </div>
     );
-    return <div className="text-white text-center">Calculating results...</div>
+    return <div className="text-white text-center font-tomorrow">Calculating results...</div>
   }
   
   return (
-    <div className="relative h-full w-full flex flex-col">
+    <div className="relative h-full w-full flex flex-col font-tomorrow">
         <div 
             className="absolute inset-0 bg-cover bg-center bg-fixed" 
             style={{ backgroundImage: `url(${MinigamesBackgroundImage})` }}

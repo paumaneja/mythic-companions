@@ -9,8 +9,7 @@ export default {
   theme: {
     extend: {},
       fontFamily: {
-        'bitcount': ['Bitcount', 'sans-serif'],
-        'rubik': ['Rubik Puddles', 'sans-serif'],
+        'tomorrow': ['Tomorrow', 'sans-serif'],
       },
   },
   plugins: [],

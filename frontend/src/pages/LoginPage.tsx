@@ -47,17 +47,17 @@ export default function LoginPage() {
 
   return (
     <div className="p-8 max-w-md w-full bg-gray-800/80 backdrop-blur-md rounded-lg shadow-xl">
-      <h2 className="font-rubik text-3xl font-bold mb-6 text-center text-yellow-500">Welcome Back!</h2>
+      <h2 className="font-tomorrow font-bold text-4xl mb-6 text-center text-white">Welcome Back!</h2>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <div className="mb-4">
-          <label className="block font-rubik text-white text-sm font-bold mb-2" htmlFor="username">Username</label>
-          <input {...register('username', { required: 'Username is required' })} className="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+          <label className="block font-tomorrow text-white text-sm font-bold mb-2" htmlFor="username">Username</label>
+          <input {...register('username', { required: 'Username is required' })} className="w-full px-3 py-2 border rounded-md font-tomorrow text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
           {errors.username && <p className="text-red-500 text-xs mt-1">{errors.username.message}</p>}
         </div>
 
         <div className="mb-6">
-          <label className="block font-rubik text-white text-sm font-bold mb-2" htmlFor="password">Password</label>
-          <input {...register('password', { required: 'Password is required' })} type="password" className="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+          <label className="block font-tomorrow text-white text-sm font-bold mb-2" htmlFor="password">Password</label>
+          <input {...register('password', { required: 'Password is required' })} type="password" className="w-full px-3 py-2 border rounded-md font-tomorrow text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
           {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
         </div>
 
@@ -67,12 +67,12 @@ export default function LoginPage() {
           </div>
         )}
 
-        <button type="submit" className="w-full font-rubik bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline disabled:bg-gray-400" disabled={loginMutation.isPending}>
+        <button type="submit" className="w-full font-tomorrow bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline disabled:bg-gray-400" disabled={loginMutation.isPending}>
           {loginMutation.isPending ? 'Logging in...' : 'Login'}
         </button>
-        <p className="font-rubik text-center text-sm text-white mt-4">
+        <p className="font-tomorrow text-center text-sm text-white mt-4">
           Don't have an account?{' '}
-          <Link to="/register" className="font-bold text-blue-600 hover:underline">
+          <Link to="/register" className="font-tomorrow font-bold text-blue-600 hover:underline">
             Register here
           </Link>
         </p>

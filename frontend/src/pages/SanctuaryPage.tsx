@@ -63,7 +63,7 @@ export default function SanctuaryPage() {
       style={{ backgroundImage: `url(${backgroundUrl})` }}
     >
       <div className="container mx-auto">  
-        <h1 className="text-4xl font-bold text-center mb-8 text-white drop-shadow-lg">{companion.name}</h1>
+        <h1 className="font-tomorrow text-4xl font-bold text-center mb-8 text-white drop-shadow-lg">{companion.name}</h1>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           {/* Left Column */}
           <div className="lg:col-span-2 justify-between flex flex-col">

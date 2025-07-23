@@ -50,18 +50,18 @@ export default function CompanionAdoptionCard({ existingSpeciesIds }: Props) {
     <div className="block p-4 border-2 border-dashed border-gray-300 bg-gray-800/80 rounded-lg shadow-lg">
       <div className="flex flex-col">
         <div className="w-full aspect-video bg-gray-900/50 mb-4 rounded-md flex flex-col p-4">
-          <h3 className="font-bitcount text-xl font-bold text-white mb-2 text-center">Adopt New Companion</h3>
+          <h3 className="font-tomorrow text-xl font-bold text-white mb-2 text-center">Adopt New Companion</h3>
           <form onSubmit={handleSubmit(onSubmit)} className="w-full flex-1 flex flex-col justify-between">
             <div className="py-2 space-y-6">
-              <select value={selectedUniverseId} onChange={(e) => setSelectedUniverseId(e.target.value)} className="w-full p-2 border rounded bg-white text-black text-sm">
+              <select value={selectedUniverseId} onChange={(e) => setSelectedUniverseId(e.target.value)} className="w-full p-2 border rounded bg-white font-tomorrow text-black text-sm">
                 <option value="" disabled>Select Universe</option>
                 {isLoading ? <option>Loading...</option> : adoptionOptions?.map(u => <option key={u.universeId} value={u.universeId}>{u.name}</option>)}
               </select>
-              <select {...register('speciesId', { required: true })} disabled={!selectedUniverseId || availableSpecies?.length === 0} className="w-full p-2 border rounded disabled:bg-gray-200 bg-white text-black text-sm">
+              <select {...register('speciesId', { required: true })} disabled={!selectedUniverseId || availableSpecies?.length === 0} className="w-full p-2 border rounded disabled:bg-gray-200 bg-white font-tomorrow text-black text-sm">
                 <option value="" disabled>Select Species</option>
                 {availableSpecies?.map(s => <option key={s.speciesId} value={s.speciesId}>{s.name}</option>)}
               </select>
-              <input {...register('name', { required: true })} placeholder="Companion Name" className="w-full p-2 border rounded text-sm" />
+              <input {...register('name', { required: true })} placeholder="Companion Name" className="w-full p-2 border rounded font-tomorrow text-sm" />
             </div>
           </form>
         </div>

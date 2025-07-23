@@ -43,10 +43,10 @@ export default function RegisterPage() {
 
   return (
     <div className="p-8 max-w-md w-full bg-gray-800/80 backdrop-blur-md rounded-lg shadow-xl">
-      <h2 className="font-rubik text-3xl font-bold mb-6 text-center text-yellow-500">Create Your Account</h2>
+      <h2 className="font-tomorrow text-4xl font-bold mb-6 text-center text-white">Create Your Account</h2>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <div className="mb-4">
-          <label className="block font-rubik text-white text-sm font-bold mb-2" htmlFor="username">
+          <label className="block font-tomorrow text-white text-sm font-bold mb-2" htmlFor="username">
             Username
           </label>
           <input 
@@ -57,7 +57,7 @@ export default function RegisterPage() {
         </div>
 
         <div className="mb-4">
-          <label className="block font-rubik text-white text-sm font-bold mb-2" htmlFor="email">
+          <label className="block font-tomorrow text-white text-sm font-bold mb-2" htmlFor="email">
             Email
           </label>
           <input 
@@ -72,7 +72,7 @@ export default function RegisterPage() {
         </div>
 
         <div className="mb-6">
-          <label className="block font-rubik text-white text-sm font-bold mb-2" htmlFor="password">
+          <label className="block font-tomorrow text-white text-sm font-bold mb-2" htmlFor="password">
             Password
           </label>
           <input 
@@ -94,12 +94,12 @@ export default function RegisterPage() {
 
         <button 
           type="submit" 
-          className="w-full bg-blue-600 hover:bg-blue-700 font-rubik text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline disabled:bg-gray-400"
+          className="w-full bg-blue-600 hover:bg-blue-700 font-tomorrow text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline disabled:bg-gray-400"
           disabled={registerMutation.isPending}
         >
           {registerMutation.isPending ? 'Registering...' : 'Create Account'}
         </button>
-        <p className="font-rubik text-center text-sm text-white mt-4">
+        <p className="font-tomorrow text-center text-sm text-white mt-4">
           Already have an account?{' '}
           <Link to="/login" className="font-bold text-blue-600 hover:underline">
             Log In

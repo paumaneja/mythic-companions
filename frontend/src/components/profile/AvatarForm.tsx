@@ -24,7 +24,7 @@ export default function AvatarForm({ user }: Props) {
   };
 
   return (
-    <div className="bg-gray-800/50 backdrop-blur-md p-6 rounded-lg shadow-lg text-center">
+    <div className="bg-gray-800/50 backdrop-blur-md p-6 rounded-lg shadow-lg text-center font-tomorrow">
       <h2 className="text-2xl font-bold mb-4">Avatar</h2>
       <div className="relative w-48 h-48 mx-auto group">
         <img 
